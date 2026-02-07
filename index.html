@@ -6,29 +6,29 @@
     <title>The Collective Myth | ISA 2026</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,700&family=Cinzel:wght@400&family=Montserrat:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <style>
         :root {
-            --deep-black: #000000;
-            --gold-leaf: #BFA15E;
-            --off-white: #e0e0e0;
-            --input-border: rgba(191, 161, 94, 0.3);
-            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --obsidian: #080808;      /* Richer than pure black */
+            --champagne-gold: #C5A059; /* Sophisticated, muted gold */
+            --stardust: #E0E0E0;      /* Soft off-white for text */
+            --ink-border: rgba(197, 160, 89, 0.2);
+            --transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body, html {
             margin: 0;
-            background-color: var(--deep-black);
-            color: var(--off-white);
+            background-color: var(--obsidian);
+            color: var(--stardust);
             font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
         }
 
-        /* --- HERO SECTION (MATCHING SCREENSHOT) --- */
+        /* --- LUXE HERO SECTION --- */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -36,130 +36,141 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-            background: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+            background: radial-gradient(circle at center, #121212 0%, var(--obsidian) 100%);
         }
 
         .hero-section .subtitle {
             font-family: 'Cinzel';
-            font-size: 12px;
-            letter-spacing: 0.6rem;
-            color: var(--gold-leaf);
-            margin-bottom: 20px;
+            font-size: 11px;
+            letter-spacing: 0.8rem;
+            color: var(--champagne-gold);
+            margin-bottom: 25px;
             text-transform: uppercase;
         }
 
         .hero-section h1 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif; /* Playfair Display Update */
             font-style: italic;
-            font-size: clamp(3rem, 10vw, 8rem);
+            font-size: clamp(3rem, 11vw, 8.5rem);
             font-weight: 400;
             margin: 0;
-            line-height: 1;
+            line-height: 1.1;
+            color: #FFFFFF;
+            letter-spacing: -2px;
         }
 
         .hero-section .tagline {
             font-family: 'Montserrat';
-            font-size: 10px;
-            letter-spacing: 0.4rem;
+            font-size: 9px;
+            letter-spacing: 0.5rem;
             text-transform: uppercase;
-            margin-top: 30px;
-            opacity: 0.6;
+            margin-top: 40px;
+            color: var(--champagne-gold);
+            opacity: 0.8;
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 50px;
+            bottom: 40px;
             cursor: pointer;
             transition: var(--transition);
+            color: var(--champagne-gold);
         }
 
-        .scroll-indicator:hover { transform: translateY(10px); color: var(--gold-leaf); }
-
-        /* --- MAIN REGISTRY LAYOUT --- */
+        /* --- REGISTRY GRID --- */
         .museum-container {
             display: grid;
-            grid-template-columns: 480px 1fr;
+            grid-template-columns: 460px 1fr;
             height: 100vh;
-            border-top: 1px solid rgba(191, 161, 94, 0.1);
+            border-top: 1px solid var(--ink-border);
         }
 
         .scribe-desk {
-            background: var(--deep-black);
             padding: 80px 60px;
-            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-right: 1px solid var(--ink-border);
             display: flex;
             flex-direction: column;
             overflow-y: auto;
+            background-color: var(--obsidian);
         }
 
         .scribe-desk h2 {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 3.5rem;
-            margin: 0 0 40px 0;
+            font-size: 3.2rem;
+            margin: 0 0 50px 0;
             font-weight: 400;
+            color: #FFF;
         }
 
         .grand-gallery {
-            padding: 80px 60px;
+            padding: 80px 70px;
             overflow-y: auto;
-            background: #030303;
+            background-color: #050505;
         }
 
-        /* --- INPUTS & UI --- */
+        /* --- FORM ELEMENTS --- */
         .label {
             font-family: 'Montserrat';
             font-size: 9px;
-            letter-spacing: 0.25rem;
+            letter-spacing: 0.3rem;
             text-transform: uppercase;
-            color: var(--gold-leaf);
-            margin-bottom: 10px;
+            color: var(--champagne-gold);
+            margin-bottom: 12px;
             display: block;
         }
 
         input, select, textarea {
             width: 100%;
             border: none;
-            border-bottom: 1px solid var(--input-border);
+            border-bottom: 1px solid var(--ink-border);
             background: transparent;
             font-family: 'Cormorant Garamond';
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: white;
-            padding: 10px 0;
-            margin-bottom: 35px;
+            padding: 12px 0;
+            margin-bottom: 40px;
             outline: none;
+            transition: border 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            border-bottom: 1px solid var(--champagne-gold);
         }
 
         button.primary {
             background: transparent;
-            color: var(--gold-leaf);
-            border: 1px solid var(--gold-leaf);
-            padding: 18px;
+            color: var(--champagne-gold);
+            border: 1px solid var(--champagne-gold);
+            padding: 22px;
             font-family: 'Montserrat';
             font-size: 10px;
-            letter-spacing: 0.4rem;
+            letter-spacing: 0.5rem;
             cursor: pointer;
             transition: var(--transition);
+            text-transform: uppercase;
         }
 
         button.primary:hover:not(:disabled) {
-            background: var(--gold-leaf);
-            color: black;
+            background: var(--champagne-gold);
+            color: var(--obsidian);
         }
 
-        /* --- ARTWORK CARDS --- */
+        /* --- ARCHIVE FEED --- */
         .artwork {
-            padding: 40px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            padding: 45px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition);
         }
 
-        .quote { font-size: 1.8rem; font-style: italic; margin-bottom: 10px; }
-        .sig { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.2rem; color: var(--gold-leaf); }
+        .artwork:hover { padding-left: 15px; border-bottom-color: var(--champagne-gold); }
 
-        @media(max-width: 900px) {
+        .quote { font-size: 1.9rem; font-style: italic; line-height: 1.4; margin-bottom: 15px; font-weight: 300; }
+        .sig { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.25rem; color: var(--champagne-gold); text-transform: uppercase; }
+
+        @media(max-width: 1100px) {
             .museum-container { grid-template-columns: 1fr; }
-            .scribe-desk { height: auto; }
+            .scribe-desk { height: auto; border-right: none; }
         }
     </style>
 </head>
@@ -172,7 +183,7 @@
         <div class="tagline">Etching Student Legacies Into Time</div>
         
         <div class="scroll-indicator" onclick="document.getElementById('registry-start').scrollIntoView()">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="12" y1="5" x2="12" y2="19"></line>
                 <polyline points="19 12 12 19 5 12"></polyline>
             </svg>
@@ -184,7 +195,7 @@
             <h2>The Registry</h2>
             
             <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-            <div class="g_id_signin" style="margin-bottom: 40px;"></div>
+            <div class="g_id_signin" style="margin-bottom: 50px;"></div>
 
             <label class="label">Recipient of Honor</label>
             <input id="recipient" placeholder="Name or Team" />
@@ -196,15 +207,15 @@
             <select id="from"></select>
 
             <label class="label">The Testimony</label>
-            <textarea id="msg" style="min-height: 80px;" placeholder="Describe the moment..."></textarea>
+            <textarea id="msg" style="min-height: 100px;" placeholder="Describe the moment..."></textarea>
 
             <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-            <div id="status" style="font-size: 9px; text-align: center; margin-top: 15px; color: var(--gold-leaf); letter-spacing: 1px;">SIGN IN TO MANAGE YOUR LEGACY</div>
+            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px;">AUTHENTICATION REQUIRED TO ETCH</div>
         </aside>
 
         <main class="grand-gallery">
-            <header style="margin-bottom: 60px;">
-                <input id="search2" style="font-size: 2rem; border:none;" placeholder="Search the archives..." />
+            <header style="margin-bottom: 80px; border-bottom: 1px solid var(--ink-border); padding-bottom: 20px;">
+                <input id="search2" style="font-size: 1.8rem; border:none; margin-bottom: 0;" placeholder="Search the archives..." />
             </header>
             <div id="feed"></div>
         </main>
@@ -214,7 +225,6 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-// Firebase Setup
 firebase.initializeApp({
     apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
     authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -230,7 +240,7 @@ let currentUser = null;
 function handleCredentialResponse(response){
     const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
     currentUser = { id: payload.sub };
-    document.getElementById("status").textContent = "SCRIBE AUTHENTICATED";
+    document.getElementById("status").textContent = "SCRIBE RECOGNIZED";
     document.getElementById("submit").disabled = false;
 }
 
@@ -244,7 +254,7 @@ function renderArtwork(item){
     if(currentUser && item.authorId === currentUser.id){
         const del = document.createElement("div");
         del.innerHTML = "[ REDACT ]";
-        del.style = "color:#8B0000; font-size:9px; margin-top:10px; cursor:pointer; font-family:Montserrat; letter-spacing:1px;";
+        del.style = "color:#8B0000; font-size:9px; margin-top:15px; cursor:pointer; font-family:Montserrat; letter-spacing:2px;";
         del.onclick = () => db.ref("registry/"+item.id).remove();
         art.appendChild(del);
     }
