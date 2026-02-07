@@ -3,300 +3,236 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>ISA Cultural Fest 2026 | The Legacy</title>
+<title>ISA Cultural Fest 2026 | The Imperial Archive</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&family=Bodoni+Moda:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <style>
-:root{
-  /* 🌸 Pastel Royal (light, airy) */
-  --blue: #ECF3FF;
-  --lavender: #F3EEFF;
-  --violet: #ECE6FA;
-  --sky: #FAFBFF;
-
-  --gold: #C9B26D;
-  --gold-soft: rgba(201,178,109,.42);
-
-  --ink: #2A2A3A;
-  --muted: #6B6B85;
-
-  --glass: rgba(255,255,255,.72);
-  --glass-2: rgba(255,255,255,.86);
-
-  --border: rgba(201,178,109,.35);
-  --border-soft: rgba(30,30,60,.10);
-
-  --radius: 26px;
-  --radius-sm: 18px;
-  --shadow: 0 30px 80px rgba(120,110,160,.20);
-  --shadow-soft: 0 16px 40px rgba(120,110,160,.14);
-
-  --ease: cubic-bezier(.19,1,.22,1);
+:root {
+  /* 🏛️ Aristocratic Palette */
+  --bone: #F9F7F2;      /* Off-white paper */
+  --silk: #F0EDE5;      /* Secondary background */
+  --gold-leaf: #BFA15E; /* Muted metallic gold */
+  --royal-ink: #1A1C20; /* Deep charcoal/near black */
+  --regal-navy: #2C3E50;
+  
+  --glass: rgba(255, 255, 255, 0.4);
+  --border: 1px solid rgba(191, 161, 94, 0.3);
+  --shadow-flat: 0 10px 30px rgba(0,0,0,0.05);
+  
+  --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-*{ box-sizing:border-box; }
+* { box-sizing: border-box; }
 
-html, body{
-  margin:0;
-  font-family: Inter, system-ui, sans-serif;
-  color: var(--ink);
-  background: linear-gradient(
-    180deg,
-    var(--blue) 0%,
-    var(--lavender) 35%,
-    var(--violet) 70%,
-    var(--sky) 100%
-  );
-}
-
-body::after{
-  /* subtle paper grain */
-  content:"";
-  position:fixed;
-  inset:0;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.08'/%3E%3C/svg%3E");
-  pointer-events:none;
-}
-
-.container{
-  width:min(1120px, calc(100% - 48px));
-  margin:0 auto;
-}
-@media(max-width:800px){
-  .container{ width:min(1120px, calc(100% - 28px)); }
-}
-
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding: 40px 0;
-}
-.hero-label{
-  font-family: Syncopate;
-  font-size:11px;
-  letter-spacing:.5rem;
-  text-transform:uppercase;
-  color: var(--muted);
-  margin: 0 0 22px;
-}
-.hero-title{
-  font-family:"Instrument Serif", serif;
-  font-size:clamp(3.4rem, 12vw, 9rem);
-  font-style:italic;
-  margin:0;
-  line-height:.9;
-  background: linear-gradient(180deg, #E7DBB5, #C9B26D);
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-}
-.hero-sub{
-  margin:18px auto 0;
-  font-weight:300;
-  max-width:60ch;
-  color: var(--muted);
-  line-height: 1.65;
-}
-
-/* REGISTRY */
-.registry{
-  padding:120px 0 80px;
-}
-.card{
-  background: var(--glass);
-  border-radius: var(--radius);
-  border:1px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: clamp(28px, 5vw, 72px);
-  backdrop-filter: blur(14px);
-}
-.card h2{
-  font-family:"Bodoni Moda", serif;
-  font-style:italic;
-  font-size:clamp(2rem, 3vw, 3rem);
-  text-align:center;
-  margin:0;
-}
-.card p{
-  text-align:center;
-  color: var(--muted);
-  margin: 14px auto 42px;
-  max-width: 72ch;
+body {
+  margin: 0;
+  font-family: 'Cormorant Garamond', serif;
+  background-color: var(--bone);
+  color: var(--royal-ink);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:28px;
-}
-@media(max-width:800px){
-  .grid{ grid-template-columns:1fr; }
-}
-.field{
-  padding:18px 20px;
-  border-radius: var(--radius-sm);
-  background: var(--glass-2);
-  border:1px solid var(--border-soft);
-  box-shadow: var(--shadow-soft);
-}
-.field label{
-  display:block;
-  font-family:Syncopate;
-  font-size:10px;
-  letter-spacing:.3rem;
-  color: var(--muted);
-  margin-bottom:12px;
-  text-transform: uppercase;
-}
-input, select, textarea{
-  width:100%;
-  border:none;
-  background:transparent;
-  border-bottom:1px solid rgba(0,0,0,.18);
-  font-family:Inter;
-  font-size:1rem;
-  padding:8px 2px;
-  outline:none;
-  color: var(--ink);
-}
-textarea{
-  resize:none;
-  min-height:74px;
-  line-height:1.55;
-}
-input:focus, select:focus, textarea:focus{
-  border-bottom-color: var(--gold);
-}
-::placeholder{ color: rgba(42,42,58,.38); }
-
-button.primary{
-  width:100%;
-  margin-top:36px;
-  padding:22px;
-  border-radius:999px;
-  border:1px solid var(--gold);
-  background: linear-gradient(180deg, #FFF7DC, #E6D29A);
-  font-family:Syncopate;
-  font-size:11px;
-  letter-spacing:.4rem;
-  cursor:pointer;
-  transition:.4s var(--ease);
-}
-button.primary:hover:not(:disabled){
-  transform:translateY(-2px);
-  box-shadow:0 20px 40px rgba(201,178,109,.30);
-}
-button.primary:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-}
-.status{
-  text-align:center;
-  font-size:11px;
-  letter-spacing:.2rem;
-  color: var(--muted);
-  margin-top:18px;
-  text-transform: uppercase;
+/* Subtle Royal Texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: -1;
 }
 
-/* FEED */
-.feed{
-  padding:80px 0 120px;
-}
-.feed-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:16px;
-  margin-bottom:24px;
-  flex-wrap: wrap;
-}
-.feed-title{
-  font-family:"Bodoni Moda", serif;
-  font-style: italic;
-  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
-  margin:0;
-}
-.searchWrap{
-  flex: 0 1 460px;
-  padding: 14px 18px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.75);
-  border: 1px solid var(--border-soft);
-  box-shadow: var(--shadow-soft);
-}
-.searchWrap input{
-  border-bottom: none;
-  padding: 6px 10px;
+.container {
+  width: min(1000px, 90%);
+  margin: 0 auto;
 }
 
-.feed-item{
-  background: rgba(255,255,255,.78);
-  border-radius: var(--radius);
-  border:1px solid var(--border);
-  box-shadow: var(--shadow);
-  padding: 34px;
-  margin-bottom: 22px;
-  text-align:center;
+/* --- HERO SECTION --- */
+.hero {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-bottom: var(--border);
 }
-.meta{
-  font-family:Syncopate;
-  font-size:10px;
-  letter-spacing:.3rem;
-  color: var(--muted);
-  margin-bottom:18px;
-  text-transform: uppercase;
-}
-.quote{
-  font-family:"Instrument Serif", serif;
-  font-size:clamp(1.6rem, 4vw, 2.6rem);
-  font-style:italic;
-  margin: 0 0 18px;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-.sig{
-  font-family:"Bodoni Moda", serif;
-  letter-spacing:.12rem;
-  color: var(--muted);
-}
-.actions{
-  margin-top: 18px;
-  display:flex;
-  justify-content:center;
-  gap:10px;
-}
-button.redact{
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid rgba(205, 85, 85, .35);
-  background: rgba(205, 85, 85, .10);
-  color: #B24C4C;
-  font-family: Syncopate;
-  font-size: 10px;
-  letter-spacing: .18rem;
-  cursor: pointer;
-  transition: .3s var(--ease);
-}
-button.redact:hover{
-  transform: translateY(-1px);
-  background: rgba(205, 85, 85, .14);
-}
-.smallNote{
-  margin-top: 10px;
+
+.hero-label {
+  font-family: 'Cinzel', serif;
   font-size: 12px;
-  color: var(--muted);
-  text-align:center;
+  letter-spacing: 0.6rem;
+  color: var(--gold-leaf);
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 10vw, 7.5rem);
+  font-weight: 300;
+  font-style: italic;
+  margin: 0;
+  line-height: 1;
+}
+
+.hero-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  letter-spacing: 0.2rem;
+  max-width: 500px;
+  margin-top: 2rem;
+  text-transform: uppercase;
+  color: var(--regal-navy);
+}
+
+/* --- REGISTRY / FORM --- */
+.registry { padding: 100px 0; }
+
+.card {
+  background: white;
+  padding: 80px 40px;
+  border: var(--border);
+  box-shadow: var(--shadow-flat);
+  position: relative;
+}
+
+/* Gold Frame Corners */
+.card::before, .card::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--gold-leaf);
+}
+.card::before { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+.card::after { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
+
+.card h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  letter-spacing: 0.3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+@media(max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+
+.field { position: relative; }
+
+.field label {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+  color: var(--gold-leaf);
+  display: block;
+  margin-bottom: 8px;
+}
+
+input, select, textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #DDD;
+  background: transparent;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  padding: 10px 0;
+  outline: none;
+  transition: var(--transition);
+}
+
+input:focus, textarea:focus { border-bottom: 1px solid var(--gold-leaf); }
+
+button.primary {
+  width: 100%;
+  margin-top: 60px;
+  padding: 20px;
+  background: var(--royal-ink);
+  color: var(--bone);
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.4rem;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button.primary:hover {
+  background: var(--gold-leaf);
+  color: white;
+  letter-spacing: 0.5rem;
+}
+
+/* --- FEED / GALLERY --- */
+.feed { padding: 100px 0; background: var(--silk); }
+
+.feed-title {
+  font-family: 'Cinzel', serif;
+  text-align: center;
+  margin-bottom: 4rem;
+  font-size: 1.8rem;
+}
+
+.feed-item {
+  background: white;
+  border-bottom: 1px solid #EEE;
+  padding: 60px;
+  margin-bottom: 40px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.feed-item:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-flat);
+}
+
+.meta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.2rem;
+  color: var(--gold-leaf);
+  margin-bottom: 1.5rem;
+}
+
+.quote {
+  font-size: 2rem;
+  font-style: italic;
+  max-width: 800px;
+  margin: 0 auto 1.5rem;
+  color: var(--royal-ink);
+}
+
+.sig {
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 0.1rem;
+  opacity: 0.7;
+}
+
+/* Redact Button Styling */
+button.redact {
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid #cc000033;
+  color: #8B0000;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  padding: 8px 15px;
+  cursor: pointer;
+  letter-spacing: 1px;
 }
 </style>
 </head>
@@ -307,8 +243,7 @@ button.redact:hover{
   <div class="container">
     <div class="hero-label">The Sovereign Estate of</div>
     <h1 class="hero-title">ISA Cultural Fest</h1>
-    <p class="hero-sub">A pastel archive of gratitude — refined, gentle, and preserved as legacy.</p>
-    <div class="hero-label" style="margin-top:34px;">MMXXVI Chronicles</div>
+    <p class="hero-sub">The 2026 Archive &bull; A Legacy in Ink</p>
   </div>
 </section>
 
@@ -316,65 +251,52 @@ button.redact:hover{
   <div class="container">
     <div class="card">
       <h2>The Imperial Registry</h2>
-      <p>
-        Authenticate to leave a testimony. Your name will <b>not</b> be shown unless you type a signature.
-        Only the author may delete their own entry.
-      </p>
-
+      
       <div id="g_id_onload"
         data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
         data-callback="handleCredentialResponse"
         data-auto_prompt="false"></div>
-
-      <div class="g_id_signin" style="display:flex;justify-content:center;margin-bottom:36px;"></div>
+      <div class="g_id_signin" style="display:flex;justify-content:center;margin-bottom:48px;"></div>
 
       <div class="grid">
         <div class="field">
-          <label for="from">Origin Department</label>
+          <label>Origin Department</label>
           <select id="from"></select>
         </div>
-
         <div class="field">
-          <label for="to">Destined Department</label>
+          <label>Destined Department</label>
           <select id="to"></select>
         </div>
-
         <div class="field">
-          <label for="recipient">The Recipient</label>
-          <input id="recipient" placeholder="Name of the distinguished..." autocomplete="off" />
+          <label>The Recipient</label>
+          <input id="recipient" placeholder="Recipient name..." autocomplete="off" />
         </div>
-
         <div class="field">
-          <label for="signature">Signature (optional)</label>
-          <input id="signature" placeholder="Leave blank to remain unnamed" autocomplete="off" />
+          <label>Signature</label>
+          <input id="signature" placeholder="Pseudonym or Blank" autocomplete="off" />
         </div>
-
-        <div class="field">
-          <label for="search">Archive Search</label>
-          <input id="search" placeholder="Recall a memory..." autocomplete="off" />
-        </div>
-
-        <div class="field" style="grid-column:1/-1;">
-          <label for="msg">The Testimony</label>
-          <textarea id="msg" placeholder="Compose your legacy..."></textarea>
+        <div class="field" style="grid-column: 1 / -1;">
+          <label>The Testimony</label>
+          <textarea id="msg" placeholder="Write your contribution to history..."></textarea>
         </div>
       </div>
 
       <button class="primary" id="submit" disabled>ETCH INTO HISTORY</button>
-      <div id="status" class="status">Authentication required</div>
-      <div class="smallNote">Tip: If you want privacy, leave “Signature” blank.</div>
+      <div id="status" style="text-align:center; margin-top:15px; font-size:12px; letter-spacing:1px; color:var(--gold-leaf);">
+        AUTHENTICATION REQUIRED
+      </div>
     </div>
   </div>
 </section>
 
 <section class="feed">
   <div class="container">
-    <div class="feed-head">
-      <h3 class="feed-title">The Gallery of Testimonies</h3>
-      <div class="searchWrap">
-        <input id="search2" placeholder="Search the archive..." autocomplete="off" />
-      </div>
+    <h3 class="feed-title">The Gallery of Testimonies</h3>
+    
+    <div style="max-width:400px; margin: 0 auto 50px; text-align:center;">
+        <input id="search2" style="text-align:center;" placeholder="Search the scrolls..." autocomplete="off" />
     </div>
+
     <div id="feed"></div>
   </div>
 </section>
@@ -383,9 +305,7 @@ button.redact:hover{
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-/* =========================
-   Firebase
-========================= */
+// Firebase Init
 firebase.initializeApp({
   apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
   authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -394,24 +314,12 @@ firebase.initializeApp({
 });
 const db = firebase.database();
 
-/* =========================
-   Roles
-========================= */
-const roles = [
-  "PR", "Finance (Sponsorship)", "Co-Presidents", "Helpers",
-  "Activity Booth Hosts", "Activity Performers", "Activity Team",
-  "HR Coordination", "HR Operation", "Secretary",
-  "Lighting & Sound Crew", "Attendees", "Core Council", "Ambassadors"
-];
+const roles = ["PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR Coordination", "Core Council", "Ambassadors", "Attendees"];
 roles.forEach(r => {
   document.getElementById("from").add(new Option(r, r));
   document.getElementById("to").add(new Option(r, r));
 });
 
-/* =========================
-   Auth (for delete ownership)
-   Note: this is UI-level ownership based on Google One Tap "sub".
-========================= */
 let currentUser = null;
 
 function decodeJwt(token){
@@ -419,16 +327,14 @@ function decodeJwt(token){
   const base64 = base64Url.replace(/-/g,'+').replace(/_/g,'/');
   return JSON.parse(atob(base64));
 }
+
 function handleCredentialResponse(response){
   const payload = decodeJwt(response.credential);
   currentUser = { id: payload.sub };
-  document.getElementById("status").textContent = "Authenticated. You may etch an entry.";
+  document.getElementById("status").textContent = "VERIFIED BY THE CROWN";
   document.getElementById("submit").disabled = false;
 }
 
-/* =========================
-   Safer rendering helpers
-========================= */
 const feedEl = document.getElementById("feed");
 function el(tag, cls, text){
   const node = document.createElement(tag);
@@ -437,112 +343,52 @@ function el(tag, cls, text){
   return node;
 }
 
-function redact(id){
-  if(!currentUser) return;
-  const ok = confirm("Delete this entry from the archive?");
-  if(!ok) return;
-  db.ref("registry/" + id).remove();
-}
-
 function renderFeedItem(item){
   const wrap = el("div", "feed-item");
-
-  const meta = el("div", "meta", `${(item.fromDept||"").toUpperCase()} → ${(item.toDept||"").toUpperCase()}`);
-  const quote = el("div", "quote", `"${item.message || ""}"`);
-
-  const sigText = item.signature
-    ? `For ${item.targetName || ""} — ${item.signature}`
-    : `For ${item.targetName || ""}`;
-
-  const sig = el("div", "sig", sigText);
-
+  const meta = el("div", "meta", `${item.fromDept} ↠ ${item.toDept}`);
+  const quote = el("div", "quote", `“${item.message}”`);
+  const sig = el("div", "sig", item.signature ? `— ${item.signature} for ${item.targetName}` : `— Refined for ${item.targetName}`);
+  
   wrap.appendChild(meta);
   wrap.appendChild(quote);
   wrap.appendChild(sig);
 
-  const isOwner = currentUser && item.authorId === currentUser.id;
-  if(isOwner){
-    const actions = el("div", "actions");
-    const btn = el("button", "redact", "DELETE ENTRY");
-    btn.addEventListener("click", () => redact(item.id));
-    actions.appendChild(btn);
-    wrap.appendChild(actions);
+  if(currentUser && item.authorId === currentUser.id){
+    const btn = el("button", "redact", "REMOVE FROM ARCHIVE");
+    btn.onclick = () => { if(confirm("Discard this record?")) db.ref("registry/"+item.id).remove(); };
+    wrap.appendChild(btn);
   }
-
   return wrap;
 }
 
-/* =========================
-   Create entry
-========================= */
-let lastSubmitAt = 0;
-
-document.getElementById("submit").addEventListener("click", () => {
-  if(!currentUser) return;
-
-  const targetName = document.getElementById("recipient").value.trim();
-  const message = document.getElementById("msg").value.trim();
-  const signature = document.getElementById("signature").value.trim();
-
+// Submitting
+document.getElementById("submit").onclick = () => {
+  const targetName = document.getElementById("recipient").value;
+  const message = document.getElementById("msg").value;
   if(!targetName || !message) return;
 
-  const now = Date.now();
-  if(now - lastSubmitAt < 1200) return;
-  lastSubmitAt = now;
-
   const newKey = db.ref().child("registry").push().key;
-
   db.ref("registry/" + newKey).set({
     id: newKey,
     targetName,
     fromDept: document.getElementById("from").value,
     toDept: document.getElementById("to").value,
     message,
-    signature: signature ? signature : null,   // ✅ only stored if typed
-    authorId: currentUser.id,                  // ✅ used to show delete only to owner
+    signature: document.getElementById("signature").value || null,
+    authorId: currentUser.id,
     timestamp: Date.now()
   });
 
   document.getElementById("recipient").value = "";
   document.getElementById("msg").value = "";
-  document.getElementById("signature").value = "";
-});
+};
 
-/* =========================
-   Live feed + filtering
-========================= */
-let cachedItems = [];
-
-db.ref("registry").on("value", (snapshot) => {
-  const data = snapshot.val();
-  cachedItems = data ? Object.values(data).sort((a,b) => (b.timestamp||0) - (a.timestamp||0)) : [];
-  paint();
-});
-
-function paint(){
+// Real-time Database
+db.ref("registry").on("value", (snap) => {
+  const data = snap.val();
+  const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
   feedEl.innerHTML = "";
-  const term = (document.getElementById("search2").value || "").toLowerCase().trim();
-
-  const items = term
-    ? cachedItems.filter(i => (JSON.stringify(i).toLowerCase().includes(term)))
-    : cachedItems;
-
-  if(items.length === 0){
-    const empty = el("div","feed-item");
-    empty.appendChild(el("div","meta","ARCHIVE STATUS"));
-    empty.appendChild(el("div","quote","\"No matching entries.\""));
-    empty.appendChild(el("div","sig","Try a different search phrase."));
-    feedEl.appendChild(empty);
-    return;
-  }
-
-  items.forEach(item => feedEl.appendChild(renderFeedItem(item)));
-}
-
-document.getElementById("search2").addEventListener("input", paint);
-document.getElementById("search").addEventListener("input", (e) => {
-  document.getElementById("search2").value = e.target.value;
-  paint();
+  items.forEach(i => feedEl.appendChild(renderFeedItem(i)));
 });
 </script>
 
