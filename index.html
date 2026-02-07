@@ -1,295 +1,154 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>ISA CULTURAL FEST 2026 // THE ARCHIVE</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C5A059;
+    --black: #050505; /* Deeper black for higher contrast */
+    --off-white: #F4F4F4;
+    --glass: rgba(255, 255, 255, 0.03);
+    --gold-glow: rgba(197, 160, 89, 0.15);
+  }
 
-  <style>
-    :root {
-      --gold: #C5A059;
-      --gold-faint: rgba(197, 160, 89, 0.15);
-      --black: #0A0A0A;
-      --off-white: #F9F7F2;
-      --glass: rgba(255, 255, 255, 0.03);
-    }
+  /* --- KINETIC CONSTELLATION --- */
+  .myth-map {
+    margin: 120px 0;
+    position: relative;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 800px;
+    background: radial-gradient(circle at center, #111 0%, var(--black) 70%);
+    overflow: hidden;
+  }
 
-    * { box-sizing: border-box; cursor: none; }
+  /* The Rotating Orbit */
+  .orbit-wrapper {
+    position: relative;
+    width: 650px;
+    height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotateOrbit 100s linear infinite; /* Slow, prestigious rotation */
+  }
 
-    body {
-      margin: 0; font-family: 'Inter', sans-serif;
-      background-color: var(--black); color: var(--off-white);
-      overflow-x: hidden; -webkit-font-smoothing: antialiased;
-    }
+  @keyframes rotateOrbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 
-    /* Elegant Custom Cursor */
-    #cursor { position: fixed; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 10000; mix-blend-mode: difference; }
-    #cursor-follower { 
-      position: fixed; width: 40px; height: 40px; border: 0.5px solid var(--gold); 
-      border-radius: 50%; pointer-events: none; z-index: 9999; 
-      transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s;
-    }
+  .myth-center {
+    position: absolute;
+    z-index: 10;
+    text-align: center;
+    width: 220px;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid var(--gold);
+    border-radius: 50%;
+    background: rgba(5, 5, 5, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 50px var(--gold-glow);
+  }
 
-    .container { max-width: 1300px; margin: 0 auto; padding: 100px 40px; }
+  .role-node {
+    position: absolute;
+    padding: 10px 18px;
+    border: 0.5px solid rgba(197, 160, 89, 0.3);
+    background: var(--glass);
+    backdrop-filter: blur(5px);
+    font-family: 'Syncopate';
+    font-size: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    transition: all 0.5s ease;
+  }
 
-    /* Aristocratic Header */
-    header { margin-bottom: 120px; text-align: center; }
-    .tagline { font-family: 'Syncopate'; font-size: 0.55rem; letter-spacing: 0.5em; color: var(--gold); text-transform: uppercase; margin-bottom: 20px; }
-    h1 { font-family: 'Instrument Serif', serif; font-size: clamp(3.5rem, 12vw, 9rem); font-weight: 400; font-style: italic; line-height: 0.8; margin: 0; }
-    .hero-sub { max-width: 600px; margin: 30px auto; font-size: 1.1rem; font-weight: 200; opacity: 0.6; line-height: 1.6; }
+  /* Counter-rotation: Keeps text readable while orbit spins */
+  .role-node .inner-text {
+    display: inline-block;
+    animation: counterRotate 100s linear infinite;
+  }
 
-    /* --- THE CONSTELLATION (CIRCULAR MYTH) --- */
-    .myth-map {
-      height: 800px; display: flex; justify-content: center; align-items: center; position: relative;
-      margin-bottom: 150px; perspective: 1000px;
-    }
+  @keyframes counterRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+  }
 
-    .myth-center {
-      z-index: 5; text-align: center; width: 220px; height: 220px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      border: 0.5px solid var(--gold); border-radius: 50%;
-      background: var(--black); box-shadow: 0 0 50px rgba(197, 160, 89, 0.1);
-    }
-    .myth-center span { font-family: 'Syncopate'; font-size: 0.6rem; letter-spacing: 4px; color: var(--gold); }
+  .role-node:hover {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+    box-shadow: 0 0 30px var(--gold-glow);
+    cursor: pointer;
+  }
 
-    .nodes-container { position: relative; width: 650px; height: 650px; animation: slowRotate 100s linear infinite; }
-    
-    @keyframes slowRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  /* SVG Background refinement */
+  .myth-lines {
+    position: absolute;
+    width: 750px;
+    height: 750px;
+    opacity: 0.1;
+    animation: rotateOrbit 180s linear infinite reverse;
+  }
 
-    .role-node {
-      position: absolute; padding: 10px 18px; border: 0.5px solid rgba(255,255,255,0.1);
-      font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 2px;
-      background: var(--black); transition: 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-      color: rgba(255,255,255,0.4); text-transform: uppercase;
-    }
+  /* Distributing nodes via CSS Variables */
+  .node-1 { transform: rotate(0deg) translate(320px); }
+  .node-2 { transform: rotate(30deg) translate(320px); }
+  .node-3 { transform: rotate(60deg) translate(320px); }
+  .node-4 { transform: rotate(90deg) translate(320px); }
+  .node-5 { transform: rotate(120deg) translate(320px); }
+  .node-6 { transform: rotate(150deg) translate(320px); }
+  .node-7 { transform: rotate(180deg) translate(320px); }
+  .node-8 { transform: rotate(210deg) translate(320px); }
+  .node-9 { transform: rotate(240deg) translate(320px); }
+  .node-10 { transform: rotate(270deg) translate(320px); }
+  .node-11 { transform: rotate(300deg) translate(320px); }
+  .node-12 { transform: rotate(330deg) translate(320px); }
 
-    /* Fixed rotation counter-act so text stays upright */
-    .node-text-wrapper { animation: slowRotate 100s linear infinite reverse; }
+  /* UI Adjustments */
+  .etch-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    transition: 0.4s;
+    text-transform: uppercase;
+  }
+  .etch-btn:hover {
+    background: var(--gold);
+    color: var(--black);
+    letter-spacing: 4px;
+  }
+</style>
 
-    .role-node:hover {
-      border-color: var(--gold); color: var(--gold); background: var(--gold-faint);
-      box-shadow: 0 0 20px var(--gold-faint); transform: scale(1.15);
-    }
+<section class="myth-map">
+  <svg class="myth-lines" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="49" fill="none" stroke="white" stroke-width="0.05"/>
+    <circle cx="50" cy="50" r="35" fill="none" stroke="#C5A059" stroke-width="0.1"/>
+    <circle cx="50" cy="50" r="20" fill="none" stroke="white" stroke-width="0.05"/>
+  </svg>
 
-    /* Radial Positions */
-    .n-1 { top: 0; left: 50%; transform: translateX(-50%); }
-    .n-2 { top: 7%; right: 20%; }
-    .n-3 { top: 25%; right: 0%; }
-    .n-4 { top: 50%; right: -10%; transform: translateY(-50%); }
-    .n-5 { bottom: 25%; right: 0%; }
-    .n-6 { bottom: 7%; right: 20%; }
-    .n-7 { bottom: 0; left: 50%; transform: translateX(-50%); }
-    .n-8 { bottom: 7%; left: 20%; }
-    .n-9 { bottom: 25%; left: 0%; }
-    .n-10 { top: 50%; left: -10%; transform: translateY(-50%); }
-    .n-11 { top: 25%; left: 0%; }
-    .n-12 { top: 7%; left: 20%; }
-
-    /* --- THE REGISTRY (BENTO STYLE) --- */
-    .registry-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 100px; }
-    @media (max-width: 1000px) { .registry-grid { grid-template-columns: 1fr; } }
-
-    .input-panel { position: sticky; top: 80px; height: fit-content; padding: 40px; border: 0.5px solid rgba(255,255,255,0.1); background: var(--glass); }
-    .panel-title { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--gold); margin-bottom: 40px; letter-spacing: 4px; }
-
-    .field { margin-bottom: 35px; }
-    .field label { display: block; font-size: 0.55rem; font-family: 'Syncopate'; letter-spacing: 2px; opacity: 0.4; margin-bottom: 10px; }
-    
-    input, select, textarea {
-      width: 100%; background: transparent; border: none; border-bottom: 0.5px solid rgba(255,255,255,0.2);
-      padding: 12px 0; color: var(--off-white); font-family: 'Inter'; font-size: 0.95rem; font-weight: 200;
-      transition: 0.4s;
-    }
-    input:focus, textarea:focus { outline: none; border-bottom-color: var(--gold); }
-
-    .etch-btn {
-      width: 100%; padding: 20px; background: transparent; color: var(--gold);
-      border: 0.5px solid var(--gold); font-family: 'Syncopate'; font-size: 0.65rem; 
-      letter-spacing: 3px; transition: 0.4s; margin-top: 20px;
-    }
-    .etch-btn:hover { background: var(--gold); color: var(--black); }
-
-    /* --- ARCHIVE FEED --- */
-    #search { 
-      font-family: 'Instrument Serif'; font-size: 2.2rem; font-style: italic; 
-      border-bottom: 1px solid var(--gold-faint); margin-bottom: 60px; width: 100%; 
-      background: transparent; border-top: none; border-left: none; border-right: none;
-      color: var(--off-white); padding: 10px 0;
-    }
-
-    .card {
-      padding: 60px 0; border-bottom: 0.5px solid rgba(255,255,255,0.05);
-      display: grid; grid-template-columns: 140px 1fr; gap: 50px; transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-    }
-    .card:hover { transform: translateY(-10px); }
-    
-    .card-meta { font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 2px; color: var(--gold); opacity: 0.8; }
-    .card-title { font-family: 'Instrument Serif'; font-size: 3.2rem; font-style: italic; margin: 0 0 15px 0; font-weight: 400; }
-    .card-text { font-size: 1.05rem; line-height: 1.8; opacity: 0.5; font-weight: 200; max-width: 90%; }
-
-    .particle { position: fixed; pointer-events: none; font-family: 'Instrument Serif'; font-style: italic; color: var(--gold); animation: rise 1.5s ease-out forwards; z-index: 1000; }
-    @keyframes rise { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-150px); opacity: 0; } }
-  </style>
-</head>
-<body>
-
-<div id="cursor"></div>
-<div id="cursor-follower"></div>
-
-<div class="container">
-  <header>
-    <div class="tagline">ISA Cultural Fest 2026</div>
-    <h1>The Collective Myth</h1>
-    <p class="hero-sub">An aristocratic registry of student-led excellence. One thousand voices, one shared legend, etched into the digital foundations of Chulalongkorn.</p>
-  </header>
-
-  <section class="myth-map">
-    <div class="myth-center">
-      <span>THE CORE</span>
-      <div style="font-family:'Instrument Serif'; font-style:italic; font-size:1.8rem; margin-top:5px;">ISA 2026</div>
-    </div>
-
-    <div class="nodes-container">
-      <div class="role-node n-1"><div class="node-text-wrapper">Co-Presidents</div></div>
-      <div class="role-node n-2"><div class="node-text-wrapper">Secretary</div></div>
-      <div class="role-node n-3"><div class="node-text-wrapper">Finance</div></div>
-      <div class="role-node n-4"><div class="node-text-wrapper">PR & Media</div></div>
-      <div class="role-node n-5"><div class="node-text-wrapper">HR Coord</div></div>
-      <div class="role-node n-6"><div class="node-text-wrapper">HR Ops</div></div>
-      <div class="role-node n-7"><div class="node-text-wrapper">Sound & Light</div></div>
-      <div class="role-node n-8"><div class="node-text-wrapper">Activity Team</div></div>
-      <div class="role-node n-9"><div class="node-text-wrapper">Booth Hosts</div></div>
-      <div class="role-node n-10"><div class="node-text-wrapper">Performers</div></div>
-      <div class="role-node n-11"><div class="node-text-wrapper">Helpers</div></div>
-      <div class="role-node n-12"><div class="node-text-wrapper">Attendees</div></div>
-    </div>
-  </section>
-
-  <div class="registry-grid">
-    <aside>
-      <div class="input-panel">
-        <div class="panel-title">Etch a Legacy</div>
-        
-        <div class="field">
-          <label>To the Recipient</label>
-          <input type="text" id="target" placeholder="The name of the legend">
-        </div>
-
-        <div class="field">
-          <label>From the Author</label>
-          <input type="text" id="sender" placeholder="Your identity">
-        </div>
-
-        <div class="field">
-          <label>In the Capacity of</label>
-          <select id="dept">
-            <option value="Co-Presidents">Co-President</option>
-            <option value="PR">PR Team</option>
-            <option value="Finance">Finance & Sponsorship</option>
-            <option value="HR">HR Team</option>
-            <option value="Tech">Sound & Light Crew</option>
-            <option value="Activities">Activity Team</option>
-            <option value="Performers">Performer</option>
-            <option value="Helpers">Helper</option>
-            <option value="Attendee">Attendee</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label>The Testimony</label>
-          <textarea id="text" placeholder="Speak your truth..."></textarea>
-        </div>
-
-        <button class="etch-btn" onclick="addEntry()">ETCH INTO HISTORY</button>
-      </div>
-    </aside>
-
-    <main>
-      <input type="text" id="search" onkeyup="filter()" placeholder="Search the archive...">
-      <div id="feed"></div>
-    </main>
+  <div class="myth-center">
+    <span>EST. 2026</span>
+    <div style="font-family:'Instrument Serif'; font-style:italic; font-size:1.8rem; letter-spacing: 0;">The Archive</div>
+    <div style="font-size: 0.4rem; letter-spacing: 2px; margin-top: 10px; opacity: 0.5;">A COLLECTIVE LEGACY</div>
   </div>
-</div>
 
-<script>
-  const storageKey = "isa_aristocracy_v1";
-  let registry = JSON.parse(localStorage.getItem(storageKey)) || [];
-
-  // Cursor Physics
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursor-follower');
-  
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    setTimeout(() => {
-      follower.style.left = e.clientX + 'px';
-      follower.style.top = e.clientY + 'px';
-    }, 50);
-  });
-
-  // Scale follower on click
-  document.addEventListener('mousedown', () => follower.style.transform = 'scale(0.8)');
-  document.addEventListener('mouseup', () => follower.style.transform = 'scale(1)');
-
-  function addEntry() {
-    const target = document.getElementById('target').value.trim();
-    const sender = document.getElementById('sender').value.trim() || "Anonymous";
-    const dept = document.getElementById('dept').value;
-    const text = document.getElementById('text').value.trim();
-
-    if(!target || !text) return;
-
-    const entry = { id: Date.now(), target, sender, dept, text };
-    registry.unshift(entry);
-    localStorage.setItem(storageKey, JSON.stringify(registry));
-    
-    document.getElementById('target').value = '';
-    document.getElementById('text').value = '';
-    render();
-    spawnText(window.innerWidth / 2, window.innerHeight / 2, "LEGACY ETCHED");
-  }
-
-  function filter() {
-    const term = document.getElementById('search').value.toLowerCase();
-    document.querySelectorAll('.card').forEach(card => {
-        card.style.display = card.innerText.toLowerCase().includes(term) ? "grid" : "none";
-    });
-  }
-
-  function render() {
-    const feed = document.getElementById('feed');
-    feed.innerHTML = '';
-    registry.forEach(item => {
-      const card = document.createElement('div');
-      card.className = 'card';
-      card.innerHTML = `
-        <div class="card-meta">
-          <div style="margin-bottom:10px;">${item.dept}</div>
-          <div style="opacity:0.4;">By ${item.sender}</div>
-        </div>
-        <div class="card-body">
-          <h2 class="card-title">To: ${item.target}</h2>
-          <p class="card-text">${item.text}</p>
-        </div>
-      `;
-      feed.appendChild(card);
-    });
-  }
-
-  function spawnText(x, y, txt) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    p.innerText = txt;
-    p.style.left = x + 'px'; p.style.top = y + 'px';
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 1500);
-  }
-
-  render();
-</script>
-</body>
-</html>
+  <div class="orbit-wrapper">
+    <div class="role-node node-1"><span class="inner-text">Co-Presidents</span></div>
+    <div class="role-node node-2"><span class="inner-text">Secretary</span></div>
+    <div class="role-node node-3"><span class="inner-text">Finance</span></div>
+    <div class="role-node node-4"><span class="inner-text">PR Team</span></div>
+    <div class="role-node node-5"><span class="inner-text">Coordination</span></div>
+    <div class="role-node node-6"><span class="inner-text">Operations</span></div>
+    <div class="role-node node-7"><span class="inner-text">Sound & Light</span></div>
+    <div class="role-node node-8"><span class="inner-text">Activities</span></div>
+    <div class="role-node node-9"><span class="inner-text">Booth Hosts</span></div>
+    <div class="role-node node-10"><span class="inner-text">Performers</span></div>
+    <div class="role-node node-11"><span class="inner-text">Helpers</span></div>
+    <div class="role-node node-12"><span class="inner-text">Attendees</span></div>
+  </div>
+</section>
