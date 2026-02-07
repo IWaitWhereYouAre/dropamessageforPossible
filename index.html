@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>MYTHIC REGISTRY // 2026</title>
+  <title>ISA CULTURAL FEST 2026 | THE REGISTRY</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --gold: #C5A059;
-      --black: #0F0F0F;
+      --black: #0A0A0A;
       --off-white: #F4F4F4;
-      --accent: #E8E2D2;
+      --soft-grey: rgba(244, 244, 244, 0.1);
     }
 
-    * { box-sizing: border-box; cursor: none; } /* Custom cursor for that prestige feel */
+    * { box-sizing: border-box; cursor: none; }
 
     body {
       margin: 0;
@@ -24,96 +24,92 @@
       background-color: var(--black);
       color: var(--off-white);
       overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
     }
 
-    /* Custom Gen Z Cursor */
+    /* Custom Luxury Cursor */
     #cursor {
-      position: fixed; width: 10px; height: 10px; background: var(--gold);
-      border-radius: 50%; pointer-events: none; z-index: 9999; transition: transform 0.1s;
+      position: fixed; width: 8px; height: 8px; background: var(--gold);
+      border-radius: 50%; pointer-events: none; z-index: 9999;
     }
     #cursor-follower {
-      position: fixed; width: 40px; height: 40px; border: 1px solid var(--gold);
-      border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.2s;
+      position: fixed; width: 30px; height: 30px; border: 0.5px solid var(--gold);
+      border-radius: 50%; pointer-events: none; z-index: 9998; transition: transform 0.15s ease-out;
     }
 
-    .container { max-width: 1400px; margin: 0 auto; padding: 100px 40px; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 80px 40px; }
 
-    /* Header: Fashion Mag Style */
-    header { border-bottom: 1px solid rgba(197, 160, 89, 0.3); padding-bottom: 40px; margin-bottom: 80px; }
-    .top-row { display: flex; justify-content: space-between; align-items: flex-end; }
-    .brand { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 5px; color: var(--gold); }
+    /* Header Section */
+    header { border-bottom: 1px solid var(--soft-grey); padding-bottom: 40px; margin-bottom: 60px; }
+    .top-meta { display: flex; justify-content: space-between; font-family: 'Syncopate', sans-serif; font-size: 0.7rem; letter-spacing: 4px; color: var(--gold); }
     h1 { 
-      font-family: 'Instrument Serif', serif; font-size: clamp(4rem, 15vw, 9rem); 
-      font-weight: 400; font-style: italic; margin: 20px 0 0 0; line-height: 0.8; 
+      font-family: 'Instrument Serif', serif; font-size: clamp(3rem, 12vw, 8rem); 
+      font-weight: 400; font-style: italic; margin: 20px 0; line-height: 0.8; 
     }
 
-    .layout { display: grid; grid-template-columns: 450px 1fr; gap: 80px; }
-    @media (max-width: 1100px) { .layout { grid-template-columns: 1fr; } }
+    /* Org Chart Section - The Divine Hierarchy */
+    .org-section { margin-bottom: 100px; }
+    .org-title { font-family: 'Syncopate', sans-serif; font-size: 0.8rem; color: var(--gold); margin-bottom: 40px; text-align: center; letter-spacing: 5px; }
+    
+    .org-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      border: 1px solid var(--soft-grey);
+      padding: 40px;
+    }
+    .org-node { text-align: center; padding: 20px; border: 1px solid transparent; transition: 0.3s; }
+    .org-node:hover { border: 1px solid var(--gold); background: rgba(197, 160, 89, 0.05); }
+    .org-node h4 { font-family: 'Instrument Serif', serif; font-size: 1.8rem; margin: 0; font-weight: 400; font-style: italic; }
+    .org-node p { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5; margin-top: 5px; }
 
-    /* The "Main Character" Input Box */
-    .input-panel { position: sticky; top: 100px; height: fit-content; }
-    .input-panel h3 { font-family: 'Syncopate', sans-serif; font-size: 0.7rem; margin-bottom: 30px; color: var(--gold); }
+    /* Main Interface */
+    .interface-grid { display: grid; grid-template-columns: 400px 1fr; gap: 80px; }
+    @media (max-width: 1100px) { .interface-grid { grid-template-columns: 1fr; } }
 
-    .input-group { margin-bottom: 40px; }
-    .input-group label { display: block; font-size: 0.6rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; opacity: 0.6; }
+    /* Minimalist Input */
+    .input-box { position: sticky; top: 60px; }
+    .field { margin-bottom: 45px; }
+    .field label { display: block; font-family: 'Syncopate', sans-serif; font-size: 0.6rem; color: var(--gold); margin-bottom: 15px; letter-spacing: 2px; }
     
     input, select, textarea {
-      width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(244, 244, 244, 0.2);
-      padding: 15px 0; font-family: 'Inter', sans-serif; font-size: 1.1rem; color: var(--off-white);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%; background: transparent; border: none; border-bottom: 1px solid var(--soft-grey);
+      padding: 10px 0; font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--off-white);
+      transition: 0.4s;
     }
-    input:focus, textarea:focus { outline: none; border-bottom-color: var(--gold); padding-left: 10px; }
+    input:focus, textarea:focus { outline: none; border-bottom-color: var(--gold); }
+    textarea { height: 60px; resize: none; }
 
-    .etch-btn {
-      background: var(--gold); color: var(--black); border: none; width: 100%; padding: 25px;
-      font-family: 'Syncopate', sans-serif; font-size: 0.8rem; letter-spacing: 2px;
-      font-weight: 700; transition: 0.5s;
+    .btn-etch {
+      width: 100%; padding: 25px; background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); font-family: 'Syncopate', sans-serif; font-size: 0.7rem; letter-spacing: 3px;
+      cursor: pointer; transition: 0.4s;
     }
-    .etch-btn:hover { background: var(--off-white); transform: scale(1.02); }
+    .btn-etch:hover { background: var(--gold); color: var(--black); }
 
-    /* The Registry Feed */
-    .feed-controls { margin-bottom: 40px; }
+    /* Search & Registry */
     #search { 
-        font-family: 'Instrument Serif', serif; font-size: 2.5rem; font-style: italic; 
-        border-bottom: 2px solid var(--gold); margin-bottom: 30px;
+      font-family: 'Instrument Serif', serif; font-size: 2.5rem; font-style: italic; 
+      border-bottom: 1px solid var(--gold); width: 100%; margin-bottom: 40px;
     }
 
-    .filter-wrap { display: flex; gap: 15px; flex-wrap: wrap; }
-    .filter-btn {
-      background: transparent; border: 1px solid rgba(244, 244, 244, 0.2); color: var(--off-white);
-      padding: 10px 20px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; transition: 0.3s;
-    }
-    .filter-btn.active { background: var(--off-white); color: var(--black); border-color: var(--off-white); }
-
-    /* Entry Cards */
     .card {
-      padding: 60px 0; border-bottom: 1px solid rgba(244, 244, 244, 0.1);
-      display: grid; grid-template-columns: 1fr 2fr; gap: 40px;
-      transition: 0.5s; position: relative;
+      padding: 50px 0; border-bottom: 1px solid var(--soft-grey);
+      display: grid; grid-template-columns: 150px 1fr; gap: 40px;
+      transition: 0.4s;
     }
-    .card:hover { transform: translateX(20px); }
-    .card:hover::before { content: "⚡"; position: absolute; left: -40px; top: 60px; color: var(--gold); }
+    .card:hover { transform: translateX(15px); }
+    .card-meta { font-family: 'Syncopate', sans-serif; font-size: 0.55rem; color: var(--gold); line-height: 2; }
+    .card-content h2 { font-family: 'Instrument Serif', serif; font-size: 2.8rem; margin: 0 0 15px 0; font-style: italic; font-weight: 400; }
+    .card-content p { font-weight: 200; line-height: 1.7; opacity: 0.8; }
 
-    .card-meta { font-family: 'Syncopate', sans-serif; font-size: 0.6rem; color: var(--gold); }
-    .card-meta span { display: block; margin-bottom: 10px; opacity: 0.6; }
-    .sender-name { font-size: 1.2rem; color: var(--off-white); opacity: 1; margin-top: 10px; }
-
-    .card-body h2 { 
-      font-family: 'Instrument Serif', serif; font-size: 3rem; margin: 0 0 20px 0; 
-      line-height: 1; font-style: italic;
-    }
-    .card-body p { font-size: 1.1rem; line-height: 1.6; opacity: 0.8; font-weight: 300; }
-
-    /* Particles */
     .particle {
       position: fixed; pointer-events: none; z-index: 1000;
       font-family: 'Instrument Serif', serif; font-style: italic; color: var(--gold);
-      animation: floatUp 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: rise 1.2s ease-out forwards;
     }
-    @keyframes floatUp {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-200px) scale(3); opacity: 0; }
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-150px); opacity: 0; }
     }
   </style>
 </head>
@@ -124,81 +120,81 @@
 
 <div class="container">
   <header>
-    <div class="top-row">
-      <div class="brand">OLYMPUS ARCHIVE // VOL. 01</div>
-      <div style="font-size: 0.7rem; opacity: 0.5;">CULTURAL FEST 2026</div>
+    <div class="top-meta">
+      <span>ISA CULTURAL FEST</span>
+      <span>EST. 2026</span>
     </div>
-    <h1>The Mythic Registry</h1>
+    <h1>The Registry</h1>
   </header>
 
-  <div class="layout">
-    <aside class="input-panel">
-      <h3>ETCH YOUR LEGACY</h3>
-      
-      <div class="input-group">
-        <label>Main Character (To)</label>
-        <input type="text" id="target" placeholder="The Hero or the Chaos?">
-      </div>
+  <section class="org-section">
+    <div class="org-title">THE DIVINE HIERARCHY</div>
+    <div class="org-grid">
+      <div class="org-node"><h4>Co-Presidents</h4><p>The Visionaries</p></div>
+      <div class="org-node"><h4>Finance</h4><p>Sponsorship & Wealth</p></div>
+      <div class="org-node"><h4>Secretary</h4><p>The Keepers of Records</p></div>
+      <div class="org-node"><h4>PR</h4><p>The Messengers</p></div>
+      <div class="org-node"><h4>HR</h4><p>Coordination & Ops</p></div>
+      <div class="org-node"><h4>Activities</h4><p>Performers & Stage</p></div>
+      <div class="org-node"><h4>Booth</h4><p>The Merchants</p></div>
+      <div class="org-node"><h4>Helpers</h4><p>The Pillars</p></div>
+    </div>
+  </section>
 
-      <div class="input-group">
-        <label>The Architect (From)</label>
-        <input type="text" id="sender" placeholder="Your @ or Name">
+  <div class="interface-grid">
+    <aside class="input-box">
+      <div class="field">
+        <label>To</label>
+        <input type="text" id="target" placeholder="">
       </div>
-
-      <div class="input-group">
-        <label>Vibe Check (Team)</label>
+      <div class="field">
+        <label>From</label>
+        <input type="text" id="sender" placeholder="">
+      </div>
+      <div class="field">
+        <label>Department</label>
         <select id="dept">
-          <option value="Visuals">Visuals (The Muses)</option>
-          <option value="Hype">Hype (The Hermes Crew)</option>
-          <option value="Backend">Backend (Hephaestus' Forge)</option>
-          <option value="Chaos Control">Chaos Control (Atlas Team)</option>
+          <option value="Co-President">Co-President</option>
+          <option value="Finance">Finance</option>
+          <option value="Secretary">Secretary</option>
+          <option value="PR">PR</option>
+          <option value="HR">HR (Coordination & Ops)</option>
+          <option value="Activities">Activities (Performers)</option>
+          <option value="Booth">Booth</option>
+          <option value="Helper">Helper</option>
         </select>
       </div>
-
-      <div class="input-group">
-        <label>The Tea (Message)</label>
-        <textarea id="text" placeholder="Spill the legend..."></textarea>
+      <div class="field">
+        <label>Testimony</label>
+        <textarea id="text" placeholder=""></textarea>
       </div>
-
-      <button class="etch-btn" onclick="addEntry()">ETCH RECORD</button>
+      <button class="btn-etch" onclick="addEntry()">ETCH RECORD</button>
     </aside>
 
     <main>
-      <div class="feed-controls">
-        <input type="text" id="search" onkeyup="filter()" placeholder="Find a hero...">
-        <div class="filter-wrap">
-          <button class="filter-btn active" onclick="setFilter('All', this)">All Myths</button>
-          <button class="filter-btn" onclick="setFilter('Visuals', this)">Visuals</button>
-          <button class="filter-btn" onclick="setFilter('Hype', this)">Hype</button>
-          <button class="filter-btn" onclick="setFilter('Backend', this)">Backend</button>
-          <button class="filter-btn" onclick="setFilter('Chaos Control', this)">Chaos Control</button>
-        </div>
-      </div>
-
+      <input type="text" id="search" onkeyup="filter()" placeholder="Search the archive...">
       <div id="feed"></div>
     </main>
   </div>
 </div>
 
 <script>
-  const storageKey = "mythic_prestige_v2";
+  const storageKey = "isa_2026_registry";
   let registry = JSON.parse(localStorage.getItem(storageKey)) || [];
-  let filterType = "All";
 
-  // Cursor Logic
+  // Custom Cursor
   const cursor = document.getElementById('cursor');
   const follower = document.getElementById('cursor-follower');
   document.addEventListener('mousemove', e => {
-    cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
-    follower.style.transform = `translate(${e.clientX - 15}px, ${e.clientY - 15}px)`;
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    follower.style.left = e.clientX + 'px';
+    follower.style.top = e.clientY + 'px';
   });
-
-  // Cheeky Ranks
-  const ranks = ["God of Unpaid Overtime", "Slayer of Deadlines", "Chief Vibe Officer", "Nymph of Chaos", "Titan of the Frontline"];
 
   function addEntry() {
     const target = document.getElementById('target').value;
-    const sender = document.getElementById('sender').value || "Mortal";
+    const sender = document.getElementById('sender').value || "Anonymous";
     const dept = document.getElementById('dept').value;
     const text = document.getElementById('text').value;
 
@@ -207,8 +203,7 @@
     const entry = {
       id: Date.now(),
       target, sender, dept, text,
-      rank: ranks[Math.floor(Math.random() * ranks.length)],
-      date: "FEB '26"
+      date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
     };
 
     registry.unshift(entry);
@@ -217,62 +212,45 @@
     document.getElementById('target').value = '';
     document.getElementById('text').value = '';
     render();
-    spawnParticles(window.innerWidth / 2, window.innerHeight / 2, "ETCHED");
-  }
-
-  function setFilter(type, btn) {
-    filterType = type;
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    render();
+    spawnEffect(window.innerWidth / 2, window.innerHeight / 2, "LEGENDARY");
   }
 
   function filter() {
     const term = document.getElementById('search').value.toLowerCase();
     document.querySelectorAll('.card').forEach(card => {
-        const matchesSearch = card.innerText.toLowerCase().includes(term);
-        const matchesFilter = filterType === "All" || card.dataset.dept === filterType;
-        card.style.display = (matchesSearch && matchesFilter) ? "grid" : "none";
+        card.style.display = card.innerText.toLowerCase().includes(term) ? "grid" : "none";
     });
   }
 
   function render() {
     const feed = document.getElementById('feed');
     feed.innerHTML = '';
-    
     registry.forEach(item => {
-      if(filterType !== "All" && item.dept !== filterType) return;
-      
       const card = document.createElement('div');
       card.className = 'card';
-      card.dataset.dept = item.dept;
-      card.onclick = (e) => spawnParticles(e.clientX, e.clientY, "VIBE");
       card.innerHTML = `
         <div class="card-meta">
-          <span>${item.dept}</span>
-          <div class="sender-name">${item.sender}</div>
-          <div style="margin-top:20px; color:white; opacity:0.4;">${item.rank}</div>
+          <span>DEPT // ${item.dept}</span>
+          <div style="color:white; margin-top:10px;">FROM: ${item.sender}</div>
         </div>
-        <div class="card-body">
+        <div class="card-content">
           <h2>To: ${item.target}</h2>
           <p>${item.text}</p>
-          <div style="font-size:0.6rem; margin-top:30px; letter-spacing:2px;">${item.date}</div>
+          <div style="font-size:0.5rem; letter-spacing:2px; margin-top:20px; opacity:0.3;">${item.date}</div>
         </div>
       `;
       feed.appendChild(card);
     });
   }
 
-  function spawnParticles(x, y, word) {
-    for(let i=0; i<3; i++) {
-        const p = document.createElement('div');
-        p.className = 'particle';
-        p.innerText = word;
-        p.style.left = x + 'px';
-        p.style.top = y + 'px';
-        document.body.appendChild(p);
-        setTimeout(() => p.remove(), 1500);
-    }
+  function spawnEffect(x, y, txt) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.innerText = txt;
+    p.style.left = x + 'px';
+    p.style.top = y + 'px';
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 1200);
   }
 
   render();
