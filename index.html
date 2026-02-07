@@ -15,6 +15,7 @@
             --champagne-gold: #C5A059;
             --stardust: #E0E0E0;
             --ink-border: rgba(197, 160, 89, 0.2);
+            --blood-red: #8B0000;
             --transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -28,40 +29,28 @@
             overflow-x: hidden;
         }
 
-        /* --- LUXE CURSOR STYLES --- */
-        .cursor-dot,
-        .cursor-outline {
+        /* --- LUXE CURSOR --- */
+        .cursor-dot, .cursor-outline {
             pointer-events: none;
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             transform: translate(-50%, -50%);
             border-radius: 50%;
             z-index: 9999;
         }
-
-        .cursor-dot {
-            width: 6px;
-            height: 6px;
-            background-color: var(--champagne-gold);
-        }
-
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--champagne-gold); }
         .cursor-outline {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 1px solid var(--champagne-gold);
-            transition: transform 0.2s ease-out, background-color 0.3s ease;
+            transition: transform 0.2s ease-out;
         }
 
-        /* Hide default cursor on desktop for full immersion */
         @media (min-width: 1100px) {
             body { cursor: none; }
-            a, button, input, select, textarea, .scroll-indicator, .artwork {
-                cursor: none;
-            }
+            button, input, select, textarea, .scroll-indicator, .artwork { cursor: none; }
         }
 
-        /* --- LUXE HERO SECTION --- */
+        /* --- HERO --- */
         .hero-section {
             height: 100vh;
             display: flex;
@@ -71,53 +60,22 @@
             text-align: center;
             background: radial-gradient(circle at center, #121212 0%, var(--obsidian) 100%);
         }
-
-        .hero-section .subtitle {
-            font-family: 'Cinzel';
-            font-size: 11px;
-            letter-spacing: 0.8rem;
-            color: var(--champagne-gold);
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
         .hero-section h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-size: clamp(3rem, 11vw, 8.5rem);
             font-weight: 400;
             margin: 0;
-            line-height: 1.1;
             color: #FFFFFF;
-            letter-spacing: -2px;
         }
 
-        .hero-section .tagline {
-            font-family: 'Montserrat';
-            font-size: 9px;
-            letter-spacing: 0.5rem;
-            text-transform: uppercase;
-            margin-top: 40px;
-            color: var(--champagne-gold);
-            opacity: 0.8;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--champagne-gold);
-        }
-
-        /* --- REGISTRY GRID --- */
+        /* --- LAYOUT --- */
         .museum-container {
             display: grid;
             grid-template-columns: 460px 1fr;
             height: 100vh;
             border-top: 1px solid var(--ink-border);
         }
-
         .scribe-desk {
             padding: 80px 60px;
             border-right: 1px solid var(--ink-border);
@@ -126,85 +84,28 @@
             overflow-y: auto;
             background-color: var(--obsidian);
         }
+        .grand-gallery { padding: 80px 70px; overflow-y: auto; background-color: #050505; }
 
-        .scribe-desk h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 3.2rem;
-            margin: 0 0 50px 0;
-            font-weight: 400;
-            color: #FFF;
-        }
-
-        .grand-gallery {
-            padding: 80px 70px;
-            overflow-y: auto;
-            background-color: #050505;
-        }
-
-        /* --- FORM ELEMENTS --- */
-        .label {
-            font-family: 'Montserrat';
-            font-size: 9px;
-            letter-spacing: 0.3rem;
-            text-transform: uppercase;
-            color: var(--champagne-gold);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid var(--ink-border);
-            background: transparent;
-            font-family: 'Cormorant Garamond';
-            font-size: 1.4rem;
-            color: white;
-            padding: 12px 0;
-            margin-bottom: 40px;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            border-bottom: 1px solid var(--champagne-gold);
-        }
-
+        /* --- UI ELEMENTS --- */
+        .label { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.3rem; text-transform: uppercase; color: var(--champagne-gold); margin-bottom: 12px; display: block; }
+        input, select, textarea { width: 100%; border: none; border-bottom: 1px solid var(--ink-border); background: transparent; font-family: 'Cormorant Garamond'; font-size: 1.4rem; color: white; padding: 12px 0; margin-bottom: 40px; outline: none; }
+        
         button.primary {
-            background: transparent;
-            color: var(--champagne-gold);
-            border: 1px solid var(--champagne-gold);
-            padding: 22px;
-            font-family: 'Montserrat';
-            font-size: 10px;
-            letter-spacing: 0.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
+            background: transparent; color: var(--champagne-gold); border: 1px solid var(--champagne-gold);
+            padding: 22px; font-family: 'Montserrat'; font-size: 10px; letter-spacing: 0.5rem;
+            cursor: pointer; transition: var(--transition); text-transform: uppercase;
+        }
+        button.primary:hover:not(:disabled) { background: var(--champagne-gold); color: var(--obsidian); }
+        
+        #signout-btn {
+            border-color: var(--blood-red); color: var(--blood-red); padding: 10px; font-size: 8px; margin-bottom: 40px;
         }
 
-        button.primary:hover:not(:disabled) {
-            background: var(--champagne-gold);
-            color: var(--obsidian);
-        }
+        .artwork { padding: 45px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
+        .quote { font-size: 1.9rem; font-style: italic; line-height: 1.4; margin-bottom: 15px; }
+        .sig { font-family: 'Montserrat'; font-size: 9px; color: var(--champagne-gold); letter-spacing: 2px; }
 
-        /* --- ARCHIVE FEED --- */
-        .artwork {
-            padding: 45px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition);
-        }
-
-        .artwork:hover { padding-left: 15px; border-bottom-color: var(--champagne-gold); }
-
-        .quote { font-size: 1.9rem; font-style: italic; line-height: 1.4; margin-bottom: 15px; font-weight: 300; }
-        .sig { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.25rem; color: var(--champagne-gold); text-transform: uppercase; }
-
-        @media(max-width: 1100px) {
-            .museum-container { grid-template-columns: 1fr; }
-            .scribe-desk { height: auto; border-right: none; }
-        }
+        @media(max-width: 1100px) { .museum-container { grid-template-columns: 1fr; } .scribe-desk { height: auto; border-right: none; } }
     </style>
 </head>
 
@@ -214,24 +115,20 @@
     <div class="cursor-outline" data-cursor-outline></div>
 
     <section class="hero-section">
-        <div class="subtitle">The Collective Myth</div>
+        <div class="subtitle" style="font-family:Cinzel; font-size:11px; letter-spacing:8px; color:var(--champagne-gold); margin-bottom:25px;">The Collective Myth</div>
         <h1>ISA Cultural Fest 2026</h1>
-        <div class="tagline">Etching Student Legacies Into Time</div>
-        
-        <div class="scroll-indicator" onclick="document.getElementById('registry-start').scrollIntoView()">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
-        </div>
+        <div class="tagline" style="font-family:Montserrat; font-size:9px; letter-spacing:5px; color:var(--champagne-gold); margin-top:40px; opacity:0.8;">ETCHING STUDENT LEGACIES INTO TIME</div>
     </section>
 
     <div class="museum-container" id="registry-start">
         <aside class="scribe-desk">
-            <h2>The Registry</h2>
+            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size:3.2rem; margin:0 0 50px 0;">The Registry</h2>
             
-            <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-            <div class="g_id_signin" style="margin-bottom: 50px;"></div>
+            <div id="auth-ui">
+                <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+                <div class="g_id_signin" id="google-btn" style="margin-bottom: 50px;"></div>
+                <button id="signout-btn" class="primary" style="display:none;">REVOKE SCRIBE STATUS</button>
+            </div>
 
             <label class="label">Recipient of Honor</label>
             <input id="recipient" placeholder="Name or Team" />
@@ -246,7 +143,7 @@
             <textarea id="msg" style="min-height: 100px;" placeholder="Describe the moment..."></textarea>
 
             <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px;">AUTHENTICATION REQUIRED TO ETCH</div>
+            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px;">AUTHENTICATION REQUIRED</div>
         </aside>
 
         <main class="grand-gallery">
@@ -261,7 +158,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-// --- FIREBASE INIT ---
+// --- FIREBASE ---
 firebase.initializeApp({
     apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
     authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -270,88 +167,87 @@ firebase.initializeApp({
 });
 const db = firebase.database();
 
-// --- LUXE CURSOR LOGIC ---
-const cursorDot = document.querySelector("[data-cursor-dot]");
-const cursorOutline = document.querySelector("[data-cursor-outline]");
-
-window.addEventListener("mousemove", (e) => {
-    const posX = e.clientX;
-    const posY = e.clientY;
-
-    cursorDot.style.left = `${posX}px`;
-    cursorDot.style.top = `${posY}px`;
-
-    cursorOutline.animate({
-        left: `${posX}px`,
-        top: `${posY}px`
-    }, { duration: 500, fill: "forwards" });
+// --- CURSOR ---
+const dot = document.querySelector("[data-cursor-dot]");
+const outline = document.querySelector("[data-cursor-outline]");
+window.addEventListener("mousemove", e => {
+    dot.style.left = outline.style.left = `${e.clientX}px`;
+    dot.style.top = outline.style.top = `${e.clientY}px`;
+    outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
 });
 
-// Interactive hover effects for the cursor
-document.body.addEventListener('mouseover', (e) => {
-    if (e.target.closest('button, input, select, textarea, .scroll-indicator, .artwork')) {
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        cursorOutline.style.backgroundColor = 'rgba(197, 160, 89, 0.1)';
-    }
-});
-document.body.addEventListener('mouseout', (e) => {
-    if (e.target.closest('button, input, select, textarea, .scroll-indicator, .artwork')) {
-        cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        cursorOutline.style.backgroundColor = 'transparent';
-    }
-});
+// --- AUTH & PERSISTENCE ---
+let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
+const msgIn = document.getElementById("msg");
+const recIn = document.getElementById("recipient");
 
-// --- APP LOGIC ---
-const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
-roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
+// Auto-recovery
+window.onload = () => {
+    if(localStorage.getItem("draft_msg")) msgIn.value = localStorage.getItem("draft_msg");
+    if(localStorage.getItem("draft_rec")) recIn.value = localStorage.getItem("draft_rec");
+    if(currentUser) updateAuthUI(true);
+};
 
-let currentUser = null;
+// Auto-save typing
+msgIn.oninput = () => localStorage.setItem("draft_msg", msgIn.value);
+recIn.oninput = () => localStorage.setItem("draft_rec", recIn.value);
+
 function handleCredentialResponse(response){
     const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
     currentUser = { id: payload.sub };
-    document.getElementById("status").textContent = "SCRIBE RECOGNIZED";
-    document.getElementById("submit").disabled = false;
+    localStorage.setItem("scribe_user", JSON.stringify(currentUser));
+    updateAuthUI(true);
 }
 
-function renderArtwork(item){
-    const art = document.createElement("div");
-    art.className = "artwork";
-    art.innerHTML = `
-        <div class="quote">“${item.message}”</div>
-        <div class="sig">— ${item.signature || 'ANONYMOUS'} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>
-    `;
-    if(currentUser && item.authorId === currentUser.id){
-        const del = document.createElement("div");
-        del.innerHTML = "[ REDACT ]";
-        del.style = "color:#8B0000; font-size:9px; margin-top:15px; cursor:pointer; font-family:Montserrat; letter-spacing:2px;";
-        del.onclick = () => db.ref("registry/"+item.id).remove();
-        art.appendChild(del);
-    }
-    return art;
+function updateAuthUI(isLoggedIn) {
+    document.getElementById("google-btn").style.display = isLoggedIn ? "none" : "block";
+    document.getElementById("signout-btn").style.display = isLoggedIn ? "block" : "none";
+    document.getElementById("submit").disabled = !isLoggedIn;
+    document.getElementById("status").textContent = isLoggedIn ? "SCRIBE RECOGNIZED" : "AUTHENTICATION REQUIRED";
 }
+
+document.getElementById("signout-btn").onclick = () => {
+    localStorage.removeItem("scribe_user");
+    location.reload();
+};
+
+// --- DATA ---
+const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
+roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
 
 document.getElementById("submit").onclick = () => {
-    const targetName = document.getElementById("recipient").value;
-    const message = document.getElementById("msg").value;
+    const targetName = recIn.value, message = msgIn.value;
     if(!targetName || !message) return;
     const newKey = db.ref().child("registry").push().key;
     db.ref("registry/" + newKey).set({
         id: newKey, targetName, fromDept: document.getElementById("from").value,
-        message, signature: document.getElementById("signature").value || null,
+        message, signature: document.getElementById("signature").value || 'Anonymous',
         authorId: currentUser.id, timestamp: Date.now()
+    }).then(() => {
+        msgIn.value = recIn.value = "";
+        localStorage.removeItem("draft_msg"); localStorage.removeItem("draft_rec");
     });
-    document.getElementById("recipient").value = "";
-    document.getElementById("msg").value = "";
 };
 
-db.ref("registry").on("value", (snap) => {
-    const data = snap.val();
-    const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
+db.ref("registry").on("value", snap => {
     const feed = document.getElementById("feed");
     feed.innerHTML = "";
-    items.forEach(i => feed.appendChild(renderArtwork(i)));
+    const items = snap.val() ? Object.values(snap.val()).sort((a,b) => b.timestamp - a.timestamp) : [];
+    items.forEach(item => {
+        const art = document.createElement("div");
+        art.className = "artwork";
+        art.innerHTML = `<div class="quote">“${item.message}”</div>
+                         <div class="sig">— ${item.signature.toUpperCase()} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>`;
+        if(currentUser && item.authorId === currentUser.id){
+            const del = document.createElement("div");
+            del.innerText = "[ REDACT ]";
+            del.style = "color:var(--blood-red); font-size:9px; margin-top:15px; cursor:pointer; letter-spacing:2px;";
+            del.onclick = () => db.ref("registry/"+item.id).remove();
+            art.appendChild(del);
+        }
+        feed.appendChild(art);
+    });
 });
 </script>
-
 </body>
 </html>
