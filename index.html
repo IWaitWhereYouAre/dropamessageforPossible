@@ -6,164 +6,185 @@
     <title>ISA CULTURAL FEST 2026 | THE LEGACY</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400&family=Playfair+Display:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400&family=Bodoni+Moda:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
     
     <script src="https://accounts.google.com/gsi/client" async defer></script>
 
     <style>
         :root {
-            --gold: #C5A059;
-            --cream: #f4f1ea;
-            --deep-black: #0a0a0a;
-            --paper: #e6e0d4;
+            --gold: #D4AF37; /* More metallic prestige gold */
+            --gold-dim: #8a6d2b;
+            --obsidian: #050505;
+            --bone: #fcfaf5;
+            --border-alpha: rgba(212, 175, 55, 0.2);
         }
 
         * { box-sizing: border-box; cursor: none; }
         
         body {
             margin: 0; font-family: 'Inter', sans-serif;
-            background-color: var(--deep-black);
-            color: var(--paper);
+            background-color: var(--obsidian);
+            color: var(--bone);
             overflow-x: hidden;
-            /* Background inspired by the Renaissance sky in your image */
-            background-image: linear-gradient(to bottom, rgba(10,10,10,0.8), rgba(10,10,10,0.9)), 
-                              url('https://www.transparenttextures.com/patterns/dark-matter.png');
+            scroll-behavior: smooth;
         }
 
-        /* CUSTOM CURSOR */
-        #cursor { position: fixed; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        /* PRESTIGE CURSOR */
+        #cursor { position: fixed; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; }
         #cursor-follower { 
-            position: fixed; width: 45px; height: 45px; border: 1px solid var(--gold); 
+            position: fixed; width: 50px; height: 50px; border: 0.5px solid var(--gold); 
             border-radius: 50%; pointer-events: none; z-index: 9998; 
-            transition: transform 0.15s ease-out; 
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1); 
         }
 
-        /* HERO SECTION - STATUE & TORN PAPER VIBE */
+        /* HERO - CINEMATIC ENTRANCE */
         .hero {
-            height: 70vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
             position: relative;
-            border-bottom: 1px solid rgba(197,160,89,0.3);
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, var(--obsidian) 80%);
         }
 
-        .hero h1 { 
+        .hero-title { 
             font-family: 'Instrument Serif', serif; 
-            font-size: clamp(4rem, 15vw, 9rem); 
+            font-size: clamp(4rem, 18vw, 12rem); 
             font-style: italic; 
             margin: 0; 
             color: var(--gold);
-            line-height: 0.9;
+            line-height: 0.8;
+            letter-spacing: -2px;
+        }
+
+        .hero-label {
+            font-family: 'Syncopate';
+            font-size: 0.6rem;
+            letter-spacing: 1.5rem;
+            margin-bottom: 30px;
+            color: var(--gold-dim);
             text-transform: uppercase;
         }
 
-        .sub-head {
-            font-family: 'Syncopate';
-            font-size: 0.7rem;
-            letter-spacing: 15px;
-            margin-top: 20px;
-            color: var(--paper);
-            opacity: 0.7;
+        /* THE CHRONICLE REGISTRY - HIGH END FORM */
+        .registry-section {
+            padding: 150px 0;
+            border-top: 1px solid var(--border-alpha);
+            display: flex;
+            justify-content: center;
         }
 
-        /* THE REGISTRY FORM - 'TORN PAPER' LOOK */
-        .registry-container {
-            max-width: 800px;
-            margin: -100px auto 100px;
-            background: var(--paper);
-            color: var(--deep-black);
-            padding: 60px;
-            position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            /* Creating a subtle torn edge effect */
-            clip-path: polygon(0% 2%, 5% 0%, 10% 2%, 15% 0%, 20% 2%, 25% 0%, 30% 2%, 35% 0%, 40% 2%, 45% 0%, 50% 2%, 55% 0%, 60% 2%, 65% 0%, 70% 2%, 75% 0%, 80% 2%, 85% 0%, 90% 2%, 95% 0%, 100% 2%, 100% 98%, 95% 100%, 90% 98%, 85% 100%, 80% 98%, 75% 100%, 70% 98%, 65% 100%, 60% 98%, 55% 100%, 50% 98%, 45% 100%, 40% 98%, 35% 100%, 30% 98%, 25% 100%, 20% 98%, 15% 100%, 10% 98%, 5% 100%, 0% 98%);
+        .registry-card {
+            width: 100%;
+            max-width: 1100px;
+            padding: 80px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--border-alpha);
+            backdrop-filter: blur(10px);
         }
 
-        .form-title {
-            font-family: 'Instrument Serif';
-            font-size: 2.5rem;
+        .form-header {
+            font-family: 'Bodoni Moda';
+            font-size: 3rem;
+            font-style: italic;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--border-alpha);
+            padding-bottom: 30px;
             text-align: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding-bottom: 20px;
         }
 
-        .input-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+        /* LUXURY INPUTS */
+        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        
+        label { 
+            font-family: 'Syncopate'; 
+            font-size: 0.5rem; 
+            color: var(--gold-dim); 
+            display: block; 
+            margin-bottom: 15px; 
+            letter-spacing: 4px;
         }
-
-        label { font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 2px; display: block; margin-bottom: 10px; font-weight: bold; }
 
         select, input, textarea {
             width: 100%;
             background: transparent;
-            border: 1px solid rgba(0,0,0,0.1);
-            padding: 12px;
+            border: none;
+            border-bottom: 1px solid var(--border-alpha);
+            padding: 15px 0;
             font-family: 'Inter';
-            font-size: 0.9rem;
-            color: var(--deep-black);
+            font-weight: 200;
+            font-size: 1.1rem;
+            color: var(--bone);
+            transition: 0.5s;
         }
 
-        select:focus, input:focus { outline: 1px solid var(--gold); border-color: var(--gold); }
+        select:focus, input:focus, textarea:focus { 
+            outline: none; 
+            border-bottom: 1px solid var(--gold);
+            background: rgba(212, 175, 55, 0.03);
+        }
 
         .submit-btn {
             width: 100%;
-            background: var(--deep-black);
+            background: transparent;
             color: var(--gold);
-            border: none;
-            padding: 20px;
+            border: 1px solid var(--gold);
+            padding: 30px;
             font-family: 'Syncopate';
             font-size: 0.7rem;
-            letter-spacing: 5px;
-            transition: 0.3s;
-            margin-top: 20px;
+            letter-spacing: 8px;
+            transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            margin-top: 40px;
         }
 
-        .submit-btn:hover:not(:disabled) { background: var(--gold); color: var(--deep-black); }
-        .submit-btn:disabled { opacity: 0.3; }
+        .submit-btn:hover:not(:disabled) { 
+            background: var(--gold); 
+            color: var(--obsidian);
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+        }
 
-        /* THE FEED - CHRONICLES */
+        /* THE FEED - ART GALLERY STYLE */
         .feed-item {
+            padding: 120px 0;
+            border-bottom: 1px solid var(--border-alpha);
             max-width: 900px;
-            margin: 0 auto 80px;
+            margin: 0 auto;
             text-align: center;
-            padding: 40px;
-            border-bottom: 1px solid rgba(197,160,89,0.1);
         }
 
-        .meta-info {
+        .meta-header {
             font-family: 'Syncopate';
-            font-size: 0.5rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-            letter-spacing: 3px;
+            font-size: 0.55rem;
+            color: var(--gold-dim);
+            margin-bottom: 30px;
+            letter-spacing: 5px;
         }
 
-        .message-body {
+        .quote-text {
             font-family: 'Instrument Serif';
-            font-size: 2.8rem;
+            font-size: clamp(2rem, 5vw, 4rem);
             font-style: italic;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            color: var(--bone);
         }
 
-        .signature {
-            font-family: 'Playfair Display';
-            font-size: 0.9rem;
-            opacity: 0.6;
-            text-transform: uppercase;
+        .signature-line {
+            font-family: 'Bodoni Moda';
+            font-size: 1rem;
+            opacity: 0.5;
+            letter-spacing: 2px;
         }
 
-        .delete-btn {
-            background: none; border: 1px solid #ff4444; color: #ff4444;
-            font-size: 0.5rem; padding: 5px 10px; margin-top: 20px; font-family: 'Syncopate';
+        .redact-btn {
+            background: none; border: none; color: #ff4444; 
+            font-size: 0.5rem; letter-spacing: 2px;
+            cursor: pointer; margin-top: 30px; opacity: 0.4;
         }
+        .redact-btn:hover { opacity: 1; }
+
     </style>
 </head>
 <body>
@@ -172,49 +193,51 @@
 <div id="cursor-follower"></div>
 
 <section class="hero">
-    <div class="sub-head">Chulalongkorn University</div>
-    <h1>ISA Cultural Fest</h1>
-    <div class="sub-head">The Living Chronicles // 2026</div>
+    <div class="hero-label">The Sovereign Estate of</div>
+    <h1 class="hero-title">ISA Cultural Fest</h1>
+    <div class="hero-label" style="margin-top:20px; letter-spacing: 8px;">MMXXVI Chronicles</div>
 </section>
 
-<div class="registry-container">
-    <h2 class="form-title">Record Your Testimony</h2>
-    
-    <div id="g_id_onload"
-         data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
-         data-callback="handleCredentialResponse"
-         data-auto_prompt="false">
+<section class="registry-section">
+    <div class="registry-card">
+        <h2 class="form-header">The Imperial Registry</h2>
+        
+        <div id="g_id_onload"
+             data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com"
+             data-callback="handleCredentialResponse"
+             data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin" data-type="standard" style="display:flex; justify-content:center; margin-bottom:50px;"></div>
+
+        <div class="input-row">
+            <div class="group">
+                <label>Origin Department</label>
+                <select id="from-dept"></select>
+            </div>
+            <div class="group">
+                <label>Destined Department</label>
+                <select id="to-dept"></select>
+            </div>
+        </div>
+
+        <div class="input-row">
+            <div class="group">
+                <label>The Recipient</label>
+                <input type="text" id="target-name" placeholder="Name of the distinguished...">
+            </div>
+            <div class="group">
+                <label>Archive Search</label>
+                <input type="text" id="search" onkeyup="filter()" placeholder="Recall a memory...">
+            </div>
+        </div>
+
+        <label>The Testimony</label>
+        <textarea id="message-text" rows="2" placeholder="Compose your legacy..."></textarea>
+
+        <button class="submit-btn" id="submit-btn" onclick="addEntry()" disabled>ETCH INTO HISTORY</button>
+        <p id="auth-status" style="text-align:center; font-size:0.5rem; margin-top:25px; color:var(--gold-dim); letter-spacing: 2px;">AUTHENTICATION REQUIRED TO ACCESS REGISTRY</p>
     </div>
-    <div class="g_id_signin" data-type="standard" style="display:flex; justify-content:center; margin-bottom:30px;"></div>
-
-    <div class="input-grid">
-        <div class="group">
-            <label>From Department</label>
-            <select id="from-dept"></select>
-        </div>
-        <div class="group">
-            <label>To Department</label>
-            <select id="to-dept"></select>
-        </div>
-    </div>
-
-    <div class="input-grid">
-        <div class="group">
-            <label>Recipient Name</label>
-            <input type="text" id="target-name" placeholder="Name of the individual...">
-        </div>
-        <div class="group">
-            <label>Search Archives</label>
-            <input type="text" id="search" onkeyup="filter()" placeholder="Find a message...">
-        </div>
-    </div>
-
-    <label>The Message</label>
-    <textarea id="message-text" rows="4" placeholder="Etch your message here..."></textarea>
-
-    <button class="submit-btn" id="submit-btn" onclick="addEntry()" disabled>POST TO THE CHRONICLES</button>
-    <p id="auth-status" style="text-align:center; font-size:0.6rem; margin-top:15px; opacity:0.5;">AUTHENTICATION REQUIRED TO POST</p>
-</div>
+</section>
 
 <div id="feed"></div>
 
@@ -222,7 +245,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-    // FIREBASE CONFIG
+    // FIREBASE DATA (Extracted from your console screenshot)
     const firebaseConfig = {
       apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
       authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -237,29 +260,20 @@
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
-    // POPULATE DEPARTMENTS
-    const roles = [
-        "PR", "Finance (Sponsorship)", "Co-Presidents", "Helpers", 
-        "Activity Booth Hosts", "Activity Performers", "Activity Team", 
-        "HR Coordination", "HR Operation", "Secretary", 
-        "Lighting & Sound Crew", "Attendees", "Core Team", "Visual Arts", "Logistics"
-    ];
-
+    // ROLES
+    const roles = ["PR", "Finance (Sponsorship)", "Co-Presidents", "Helpers", "Activity Booth Hosts", "Activity Performers", "Activity Team", "HR Coordination", "HR Operation", "Secretary", "Lighting & Sound Crew", "Attendees", "Core Council", "Ambassadors"];
     const fromSelect = document.getElementById('from-dept');
     const toSelect = document.getElementById('to-dept');
-
     roles.forEach(role => {
-        const opt1 = new Option(role, role);
-        const opt2 = new Option(role, role);
-        fromSelect.add(opt1);
-        toSelect.add(opt2);
+        fromSelect.add(new Option(role, role));
+        toSelect.add(new Option(role, role));
     });
 
     // CURSOR
     document.addEventListener('mousemove', e => {
         document.getElementById('cursor').style.left = e.clientX + 'px'; 
         document.getElementById('cursor').style.top = e.clientY + 'px';
-        document.getElementById('cursor-follower').style.transform = `translate(${e.clientX - 22}px, ${e.clientY - 22}px)`;
+        document.getElementById('cursor-follower').style.transform = `translate(${e.clientX - 25}px, ${e.clientY - 25}px)`;
     });
 
     // AUTH
@@ -273,18 +287,18 @@
     function handleCredentialResponse(response) {
         const payload = decodeJwtResponse(response.credential);
         currentUser = { id: payload.sub, name: payload.name };
-        document.getElementById('auth-status').innerText = `IDENTIFIED AS: ${currentUser.name.toUpperCase()}`;
+        document.getElementById('auth-status').innerText = `RECOGNIZED: ${currentUser.name.toUpperCase()}`;
         document.getElementById('submit-btn').disabled = false;
     }
 
-    // DATABASE OPERATIONS
+    // DATABASE
     function addEntry() {
         const targetName = document.getElementById('target-name').value.trim();
         const fromDept = document.getElementById('from-dept').value;
         const toDept = document.getElementById('to-dept').value;
         const message = document.getElementById('message-text').value.trim();
 
-        if(!targetName || !message) return alert("All fields must be etched.");
+        if(!targetName || !message) return;
 
         const newKey = database.ref().child('registry').push().key;
         database.ref('registry/' + newKey).set({
@@ -296,11 +310,10 @@
         document.getElementById('message-text').value = '';
     }
 
-    function deleteEntry(id) {
-        if(confirm("Redact this chronicle?")) database.ref('registry/' + id).remove();
+    function redact(id) {
+        if(confirm("Do you wish to strike this from the eternal record?")) database.ref('registry/' + id).remove();
     }
 
-    // REAL-TIME FEED
     database.ref('registry').on('value', (snapshot) => {
         const feed = document.getElementById('feed');
         feed.innerHTML = '';
@@ -310,10 +323,10 @@
                 const isOwner = currentUser && item.authorId === currentUser.id;
                 feed.innerHTML += `
                     <div class="feed-item">
-                        <div class="meta-info">FROM ${item.fromDept} TO ${item.toDept}</div>
-                        <div class="message-body">"${item.message}"</div>
-                        <div class="signature">For ${item.targetName} — Signed by ${item.author}</div>
-                        ${isOwner ? `<button class="delete-btn" onclick="deleteEntry('${item.id}')">REDACT</button>` : ''}
+                        <div class="meta-header">${item.fromDept.toUpperCase()} // TO // ${item.toDept.toUpperCase()}</div>
+                        <div class="quote-text">"${item.message}"</div>
+                        <div class="signature-line">For ${item.targetName} — Sincerely, ${item.author}</div>
+                        ${isOwner ? `<button class="redact-btn" onclick="redact('${item.id}')">[ REDACT ENTRY ]</button>` : ''}
                     </div>`;
             });
         }
