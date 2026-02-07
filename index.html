@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>ISA CULTURAL FEST 2026 | THE COLLECTIVE MYTH</title>
+  <title>ISA CULTURAL FEST 2026</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
@@ -94,55 +94,160 @@
 
 <div class="container">
   <header>
-    <div class="tagline">A COLLECTIVE LEGACY // ISA 2026</div>
-    <h1>ISA Cultural Fest</h1>
-    <p style="font-family: 'Instrument Serif'; font-size: 1.8rem; opacity: 0.6;">A myth built by hand, heart, and shared experience.</p>
+    <div class="tagline">A COLLECTIVE LEGACY</div>
+    <h1>ISA Cultural Fest 2026</h1>
+    <p style="font-family: 'Instrument Serif'; font-size: 1.8rem; opacity: 0.6;">One of Chulalongkorn University’s largest international events, built and hosted entirely by students.</p>
   </header>
 
-  <section class="myth-map">
-    <div class="map-title">THE ANATOMY OF OUR LEGEND</div>
-    
-    <div class="tier">
-      <div class="role-node core">Co-Presidents (The Vision)</div>
-    </div>
-    
-    <div class="tier">
-      <div class="role-node">Secretary (The Scribes)</div>
-      <div class="role-node">Finance & Sponsorship (The Foundation)</div>
-      <div class="role-node">PR (The Proclamation)</div>
-    </div>
-    
-    <div class="tier">
-      <div class="role-node">HR Coordination & Operation (The Pulse)</div>
-      <div class="role-node">Lighting & Sound Crew (The Atmosphere)</div>
-    </div>
-    
-    <div class="tier">
-      <div class="role-node">Activity Team (The Architects)</div>
-      <div class="role-node">Booth Hosts (The Gatekeepers)</div>
-      <div class="role-node">Performers (The Living Story)</div>
-    </div>
-    
-    <div class="tier">
-      <div class="role-node">Helpers (The Hands)</div>
-      <div class="role-node">Attendees (The Witness)</div>
-    </div>
-  </section>
+  <style>
+  /* --- THE COLLECTIVE CIRCLE (NO HIERARCHY) --- */
+  .myth-map {
+    margin: 100px 0;
+    position: relative;
+    padding: 100px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    background: radial-gradient(circle, rgba(197, 160, 89, 0.05) 0%, transparent 70%);
+  }
+
+  .myth-center {
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    background: var(--black);
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.2);
+  }
+
+  .myth-center span {
+    font-family: 'Syncopate';
+    font-size: 0.6rem;
+    letter-spacing: 3px;
+    color: var(--gold);
+  }
+
+  /* The Radial Container */
+  .nodes-container {
+    position: relative;
+    width: 550px;
+    height: 550px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .role-node {
+    position: absolute;
+    padding: 12px 20px;
+    border: 1px solid rgba(244, 244, 244, 0.2);
+    font-family: 'Syncopate';
+    font-size: 0.55rem;
+    letter-spacing: 1px;
+    background: var(--black);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+    color: rgba(244, 244, 244, 0.7);
+  }
+
+  /* Distributing 12 roles in a circle */
+  .node-1 { transform: rotate(0deg) translate(280px) rotate(0deg); }
+  .node-2 { transform: rotate(30deg) translate(280px) rotate(-30deg); }
+  .node-3 { transform: rotate(60deg) translate(280px) rotate(-60deg); }
+  .node-4 { transform: rotate(90deg) translate(280px) rotate(-90deg); }
+  .node-5 { transform: rotate(120deg) translate(280px) rotate(-120deg); }
+  .node-6 { transform: rotate(150deg) translate(280px) rotate(-150deg); }
+  .node-7 { transform: rotate(180deg) translate(280px) rotate(-180deg); }
+  .node-8 { transform: rotate(210deg) translate(280px) rotate(-210deg); }
+  .node-9 { transform: rotate(240deg) translate(280px) rotate(-240deg); }
+  .node-10 { transform: rotate(270deg) translate(280px) rotate(-270deg); }
+  .node-11 { transform: rotate(300deg) translate(280px) rotate(-300deg); }
+  .node-12 { transform: rotate(330deg) translate(280px) rotate(-330deg); }
+
+  .role-node:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: scale(1.1) rotate(var(--rot)) translate(280px) rotate(calc(-1 * var(--rot))); /* Adjusts for individual hover */
+    box-shadow: 0 0 20px var(--mythic-glow);
+    z-index: 10;
+  }
+
+  /* Connecting lines (SVG Background) */
+  .myth-lines {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+
+  @media (max-width: 700px) {
+    .nodes-container { width: 300px; height: 300px; }
+    .node-1, .node-2, .node-3, .node-4, .node-5, .node-6, 
+    .node-7, .node-8, .node-9, .node-10, .node-11, .node-12 {
+      transform: none; position: relative; margin-bottom: 10px;
+    }
+    .myth-map { flex-direction: column; min-height: auto; }
+    .myth-center { position: relative; margin-bottom: 40px; transform: none; inset: auto; }
+    .myth-lines { display: none; }
+    .role-node { position: relative; transform: none !important; width: 100%; text-align: center; }
+  }
+</style>
+
+<section class="myth-map">
+  <svg class="myth-lines" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="48" fill="none" stroke="white" stroke-width="0.1"/>
+    <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="0.1"/>
+    <line x1="50" y1="0" x2="50" y2="100" stroke="white" stroke-width="0.1"/>
+    <line x1="0" y1="50" x2="100" y2="50" stroke="white" stroke-width="0.1"/>
+  </svg>
+
+  <div class="myth-center">
+    <span>ISA 2026</span>
+    <div style="font-family:'Instrument Serif'; font-style:italic; font-size:1.5rem;">The Core</div>
+  </div>
+
+  <div class="nodes-container">
+    <div class="role-node node-1">Co-Presidents</div>
+    <div class="role-node node-2">Secretary</div>
+    <div class="role-node node-3">Finance & Sponsorship</div>
+    <div class="role-node node-4">PR Team</div>
+    <div class="role-node node-5">HR Coordination</div>
+    <div class="role-node node-6">HR Operation</div>
+    <div class="role-node node-7">Sound & Light</div>
+    <div class="role-node node-8">Activity Team</div>
+    <div class="role-node node-9">Booth Hosts</div>
+    <div class="role-node node-10">Performers</div>
+    <div class="role-node node-11">Helpers</div>
+    <div class="role-node node-12">Attendees</div>
+  </div>
+</section>
 
   <div class="registry-grid">
     <aside class="input-sticky">
       <div class="map-title" style="margin-bottom: 20px;">ETCH A NEW MEMORY</div>
       
-      <label>To (The Recipient Hero)</label>
-      <input type="text" id="target" placeholder="Which soul made the myth?">
+      <label>To</label>
+      <input type="text" id="target" placeholder="">
 
-      <label>From (The Author)</label>
-      <input type="text" id="sender" placeholder="Your name or @">
+      <label>From</label>
+      <input type="text" id="sender" placeholder="">
 
       <label>Your Role in the Myth</label>
       <select id="dept">
         <option value="Co-Presidents">Co-President</option>
-        <option value="PR">PR / Comms</option>
+        <option value="PR">PR</option>
         <option value="Finance">Finance / Sponsorship</option>
         <option value="HR">HR (Coord/Ops)</option>
         <option value="Tech">Lighting & Sound Crew</option>
