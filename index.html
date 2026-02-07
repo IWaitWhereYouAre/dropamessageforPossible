@@ -1,154 +1,355 @@
-<style>
-  :root {
-    --gold: #C5A059;
-    --black: #050505; /* Deeper black for higher contrast */
-    --off-white: #F4F4F4;
-    --glass: rgba(255, 255, 255, 0.03);
-    --gold-glow: rgba(197, 160, 89, 0.15);
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>ISA CULTURAL FEST 2026 | THE LEGACY</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Instrument+Serif:ital@0;1&family=Inter:wght@200;400&display=swap" rel="stylesheet">
 
-  /* --- KINETIC CONSTELLATION --- */
-  .myth-map {
-    margin: 120px 0;
-    position: relative;
-    padding: 100px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 800px;
-    background: radial-gradient(circle at center, #111 0%, var(--black) 70%);
-    overflow: hidden;
-  }
+    <style>
+        :root {
+            --gold: #C5A059;
+            --gold-dim: #866d3d;
+            --black: #050505;
+            --off-white: #E8E8E8;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
 
-  /* The Rotating Orbit */
-  .orbit-wrapper {
-    position: relative;
-    width: 650px;
-    height: 650px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: rotateOrbit 100s linear infinite; /* Slow, prestigious rotation */
-  }
+        * { box-sizing: border-box; cursor: none; }
+        body {
+            margin: 0; font-family: 'Inter', sans-serif;
+            background-color: var(--black); color: var(--off-white);
+            overflow-x: hidden; scroll-behavior: smooth;
+        }
 
-  @keyframes rotateOrbit {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+        /* --- ARISTOCRATIC CURSOR --- */
+        #cursor { position: fixed; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; pointer-events: none; z-index: 9999; }
+        #cursor-follower { 
+            position: fixed; width: 40px; height: 40px; border: 0.5px solid var(--gold); 
+            border-radius: 50%; pointer-events: none; z-index: 9998; 
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1); 
+        }
 
-  .myth-center {
-    position: absolute;
-    z-index: 10;
-    text-align: center;
-    width: 220px;
-    height: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: 0.5px solid var(--gold);
-    border-radius: 50%;
-    background: rgba(5, 5, 5, 0.8);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 50px var(--gold-glow);
-  }
+        .container { max-width: 1600px; margin: 0 auto; padding: 0 60px; }
 
-  .role-node {
-    position: absolute;
-    padding: 10px 18px;
-    border: 0.5px solid rgba(197, 160, 89, 0.3);
-    background: var(--glass);
-    backdrop-filter: blur(5px);
-    font-family: 'Syncopate';
-    font-size: 0.5rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--gold);
-    transition: all 0.5s ease;
-  }
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
 
-  /* Counter-rotation: Keeps text readable while orbit spins */
-  .role-node .inner-text {
-    display: inline-block;
-    animation: counterRotate 100s linear infinite;
-  }
+        .hero h1 {
+            font-family: 'Instrument Serif';
+            font-size: clamp(4rem, 15vw, 12rem);
+            font-weight: 400;
+            font-style: italic;
+            margin: 0;
+            line-height: 0.8;
+            z-index: 2;
+        }
 
-  @keyframes counterRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(-360deg); }
-  }
+        .gold-label {
+            font-family: 'Syncopate';
+            font-size: 0.7rem;
+            letter-spacing: 12px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
 
-  .role-node:hover {
-    background: var(--gold);
-    color: var(--black);
-    border-color: var(--gold);
-    box-shadow: 0 0 30px var(--gold-glow);
-    cursor: pointer;
-  }
+        /* --- KINETIC CONSTELLATION --- */
+        .constellation-wrapper {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            opacity: 0.4;
+        }
 
-  /* SVG Background refinement */
-  .myth-lines {
-    position: absolute;
-    width: 750px;
-    height: 750px;
-    opacity: 0.1;
-    animation: rotateOrbit 180s linear infinite reverse;
-  }
+        .constellation-orbit {
+            position: relative;
+            width: 800px;
+            height: 800px;
+            border: 1px solid rgba(197, 160, 89, 0.1);
+            border-radius: 50%;
+            animation: rotateOrbit 100s linear infinite;
+        }
 
-  /* Distributing nodes via CSS Variables */
-  .node-1 { transform: rotate(0deg) translate(320px); }
-  .node-2 { transform: rotate(30deg) translate(320px); }
-  .node-3 { transform: rotate(60deg) translate(320px); }
-  .node-4 { transform: rotate(90deg) translate(320px); }
-  .node-5 { transform: rotate(120deg) translate(320px); }
-  .node-6 { transform: rotate(150deg) translate(320px); }
-  .node-7 { transform: rotate(180deg) translate(320px); }
-  .node-8 { transform: rotate(210deg) translate(320px); }
-  .node-9 { transform: rotate(240deg) translate(320px); }
-  .node-10 { transform: rotate(270deg) translate(320px); }
-  .node-11 { transform: rotate(300deg) translate(320px); }
-  .node-12 { transform: rotate(330deg) translate(320px); }
+        @keyframes rotateOrbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-  /* UI Adjustments */
-  .etch-btn {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    transition: 0.4s;
-    text-transform: uppercase;
-  }
-  .etch-btn:hover {
-    background: var(--gold);
-    color: var(--black);
-    letter-spacing: 4px;
-  }
-</style>
+        .role-node {
+            position: absolute;
+            font-family: 'Syncopate';
+            font-size: 0.5rem;
+            letter-spacing: 2px;
+            color: var(--gold);
+            white-space: nowrap;
+            top: 50%; left: 50%;
+        }
 
-<section class="myth-map">
-  <svg class="myth-lines" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="49" fill="none" stroke="white" stroke-width="0.05"/>
-    <circle cx="50" cy="50" r="35" fill="none" stroke="#C5A059" stroke-width="0.1"/>
-    <circle cx="50" cy="50" r="20" fill="none" stroke="white" stroke-width="0.05"/>
-  </svg>
+        /* Position nodes using negative rotation to keep text upright */
+        .node { position: absolute; }
+        /* CSS loop for placement in production would be JS, here we manual some */
+        .node:nth-child(1) { transform: rotate(0deg) translate(400px) rotate(0deg); }
+        .node:nth-child(2) { transform: rotate(45deg) translate(400px) rotate(-45deg); }
+        .node:nth-child(3) { transform: rotate(90deg) translate(400px) rotate(-90deg); }
+        .node:nth-child(4) { transform: rotate(135deg) translate(400px) rotate(-135deg); }
+        .node:nth-child(5) { transform: rotate(180deg) translate(400px) rotate(-180deg); }
+        .node:nth-child(6) { transform: rotate(225deg) translate(400px) rotate(-225deg); }
+        .node:nth-child(7) { transform: rotate(270deg) translate(400px) rotate(-270deg); }
+        .node:nth-child(8) { transform: rotate(315deg) translate(400px) rotate(-315deg); }
 
-  <div class="myth-center">
-    <span>EST. 2026</span>
-    <div style="font-family:'Instrument Serif'; font-style:italic; font-size:1.8rem; letter-spacing: 0;">The Archive</div>
-    <div style="font-size: 0.4rem; letter-spacing: 2px; margin-top: 10px; opacity: 0.5;">A COLLECTIVE LEGACY</div>
-  </div>
+        /* --- CONTENT GRID --- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 450px 1fr;
+            gap: 120px;
+            padding-bottom: 200px;
+        }
 
-  <div class="orbit-wrapper">
-    <div class="role-node node-1"><span class="inner-text">Co-Presidents</span></div>
-    <div class="role-node node-2"><span class="inner-text">Secretary</span></div>
-    <div class="role-node node-3"><span class="inner-text">Finance</span></div>
-    <div class="role-node node-4"><span class="inner-text">PR Team</span></div>
-    <div class="role-node node-5"><span class="inner-text">Coordination</span></div>
-    <div class="role-node node-6"><span class="inner-text">Operations</span></div>
-    <div class="role-node node-7"><span class="inner-text">Sound & Light</span></div>
-    <div class="role-node node-8"><span class="inner-text">Activities</span></div>
-    <div class="role-node node-9"><span class="inner-text">Booth Hosts</span></div>
-    <div class="role-node node-10"><span class="inner-text">Performers</span></div>
-    <div class="role-node node-11"><span class="inner-text">Helpers</span></div>
-    <div class="role-node node-12"><span class="inner-text">Attendees</span></div>
-  </div>
+        .sidebar { position: sticky; top: 100px; height: fit-content; }
+
+        .section-title {
+            font-family: 'Instrument Serif';
+            font-size: 3.5rem;
+            font-style: italic;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 20px;
+        }
+
+        /* --- INPUTS --- */
+        .input-group { margin-bottom: 40px; }
+        label { 
+            display: block; font-family: 'Syncopate'; font-size: 0.55rem; 
+            color: var(--gold-dim); margin-bottom: 15px; letter-spacing: 2px;
+        }
+        input, select, textarea {
+            width: 100%; background: transparent; border: none;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding: 15px 0; color: var(--off-white);
+            font-family: 'Inter'; font-weight: 200; font-size: 1.1rem;
+            transition: border 0.3s ease;
+        }
+        input:focus, textarea:focus { outline: none; border-color: var(--gold); }
+
+        .etch-button {
+            width: 100%; padding: 25px; background: transparent;
+            border: 1px solid var(--gold); color: var(--gold);
+            font-family: 'Syncopate'; font-size: 0.7rem; letter-spacing: 4px;
+            transition: all 0.4s; margin-bottom: 20px;
+        }
+        .etch-button:hover { background: var(--gold); color: var(--black); }
+
+        .google-btn {
+            width: 100%; padding: 15px; background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1); color: var(--off-white);
+            font-family: 'Inter'; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+
+        /* --- THE FEED --- */
+        .feed-item {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .meta { font-family: 'Syncopate'; font-size: 0.6rem; color: var(--gold); letter-spacing: 2px; display: flex; justify-content: space-between; }
+        .testimonial { font-family: 'Instrument Serif'; font-size: 2.2rem; line-height: 1.2; font-style: italic; }
+        .author-tag { font-family: 'Inter'; font-weight: 200; opacity: 0.5; font-size: 0.9rem; }
+        
+        .delete-trigger {
+            background: none; border: none; color: #ff4444; 
+            font-family: 'Syncopate'; font-size: 0.5rem; letter-spacing: 1px;
+            cursor: pointer; opacity: 0; transition: opacity 0.3s;
+        }
+        .feed-item:hover .delete-trigger { opacity: 0.6; }
+
+        @media (max-width: 1000px) {
+            .main-grid { grid-template-columns: 1fr; }
+            .sidebar { position: relative; top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-follower"></div>
+
+<div class="constellation-wrapper">
+    <div class="constellation-orbit" id="orbit">
+        </div>
+</div>
+
+<section class="hero">
+    <div class="gold-label">The Collective Myth</div>
+    <h1>ISA Cultural Fest 2026</h1>
+    <p style="font-family: 'Inter'; font-weight: 200; font-size: 0.9rem; letter-spacing: 4px; margin-top: 30px; opacity: 0.6;">ETCHING STUDENT LEGACIES INTO TIME</p>
+    <a href="#registry" style="margin-top: 50px; color: var(--gold); text-decoration: none; font-size: 2rem;">↓</a>
 </section>
+
+<div class="container" id="registry">
+    <div class="main-grid">
+        <aside class="sidebar">
+            <h2 class="section-title">The Registry</h2>
+            
+            <div class="input-group">
+                <label>Recipient of Honor</label>
+                <input type="text" id="target" placeholder="Name or Team">
+            </div>
+
+            <div class="input-group">
+                <label>The Scribe</label>
+                <input type="text" id="sender" placeholder="Your Name">
+            </div>
+
+            <div class="input-group">
+                <label>Affiliation</label>
+                <select id="dept">
+                    <option>Core Committee</option>
+                    <option>The Creative PR</option>
+                    <option>Technical Arts</option>
+                    <option>Cultural Performer</option>
+                    <option>The Volunteers</option>
+                    <option>Guest / Witness</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>The Testimony</label>
+                <textarea id="text" rows="4" placeholder="Describe the moment..."></textarea>
+            </div>
+
+            <button class="etch-button" onclick="addEntry()">RECORD INTO HISTORY</button>
+            
+            <button class="google-btn" onclick="googleSignIn()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" width="16">
+                Sign in to manage your legacy
+            </button>
+            <p style="font-size: 0.6rem; opacity: 0.4; text-align: center; margin-top: 15px;">Only authenticated scribes may redact their words.</p>
+        </aside>
+
+        <main>
+            <input type="text" id="search" onkeyup="filter()" placeholder="Search the archives..." 
+                   style="font-family: 'Instrument Serif'; font-size: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 60px;">
+            <div id="feed"></div>
+        </main>
+    </div>
+</div>
+
+<script>
+    const roles = ["Presidents", "Scribes", "Treasurers", "Architects", "Curators", "Engineers", "Performers", "Witnesses", "Artisans", "Harbingers"];
+    const orbit = document.getElementById('orbit');
+    let currentUser = null; // Mock for Google Auth logic
+
+    // Initialize Kinetic Constellation
+    roles.forEach((role, i) => {
+        const angle = (i / roles.length) * 360;
+        const node = document.createElement('div');
+        node.className = 'role-node';
+        node.style.transform = `rotate(${angle}deg) translate(400px) rotate(-${angle}deg)`;
+        node.innerText = role;
+        orbit.appendChild(node);
+    });
+
+    // Cursor Movement
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursor-follower');
+    document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+        follower.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+    });
+
+    // Storage Logic
+    const storageKey = "isa_aristocrat_2026";
+    let registry = JSON.parse(localStorage.getItem(storageKey)) || [];
+
+    function addEntry() {
+        const target = document.getElementById('target').value.trim();
+        const sender = document.getElementById('sender').value.trim() || "Anonymous";
+        const dept = document.getElementById('dept').value;
+        const text = document.getElementById('text').value.trim();
+
+        if(!target || !text) return alert("A testimony requires both a subject and words.");
+
+        const entry = { 
+            id: Date.now(), 
+            target, 
+            sender, 
+            dept, 
+            text,
+            userId: currentUser ? currentUser.uid : null 
+        };
+
+        registry.unshift(entry);
+        localStorage.setItem(storageKey, JSON.stringify(registry));
+        
+        document.getElementById('target').value = '';
+        document.getElementById('text').value = '';
+        render();
+    }
+
+    function deleteEntry(id) {
+        if(!currentUser) return alert("Only the authenticated Author may redact history.");
+        registry = registry.filter(e => e.id !== id);
+        localStorage.setItem(storageKey, JSON.stringify(registry));
+        render();
+    }
+
+    function googleSignIn() {
+        // This is a placeholder for actual Google Auth integration
+        alert("Connecting to Google Services...");
+        currentUser = { uid: "mock_user_123", name: "User" };
+        document.querySelector('.google-btn').innerText = "Authenticated as Scribe";
+        render(); // Re-render to show delete buttons if applicable
+    }
+
+    function render() {
+        const feed = document.getElementById('feed');
+        feed.innerHTML = '';
+        registry.forEach(item => {
+            const isOwner = currentUser && item.userId === currentUser.uid;
+            const card = document.createElement('div');
+            card.className = 'feed-item';
+            card.innerHTML = `
+                <div class="meta">
+                    <span>${item.dept}</span>
+                    ${isOwner ? `<button class="delete-trigger" onclick="deleteEntry(${item.id})">[ REDACT ]</button>` : ''}
+                </div>
+                <div class="testimonial">"To ${item.target}, ${item.text}"</div>
+                <div class="author-tag">— Etched by ${item.sender}</div>
+            `;
+            feed.appendChild(card);
+        });
+    }
+
+    function filter() {
+        const term = document.getElementById('search').value.toLowerCase();
+        document.querySelectorAll('.feed-item').forEach(item => {
+            item.style.display = item.innerText.toLowerCase().includes(term) ? "flex" : "none";
+        });
+    }
+
+    render();
+</script>
+</body>
+</html>
