@@ -11,14 +11,14 @@
 
     <style>
         :root {
-            --obsidian: #080808;      /* Richer than pure black */
-            --champagne-gold: #C5A059; /* Sophisticated, muted gold */
-            --stardust: #E0E0E0;      /* Soft off-white for text */
-            --ink-border: rgba(197, 160, 89, 0.2);
-            --transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            --obsidian: #050505;
+            --champagne-gold: #C5A059;
+            --stardust: #E0E0E0;
+            --ink-border: rgba(197, 160, 89, 0.15);
+            --transition-luxe: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+        * { cursor: none !important; box-sizing: border-box; scroll-behavior: smooth; }
 
         body, html {
             margin: 0;
@@ -28,195 +28,129 @@
             overflow-x: hidden;
         }
 
-        /* --- LUXE HERO SECTION --- */
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #121212 0%, var(--obsidian) 100%);
+        /* --- LUXURIOUS CURSOR --- */
+        #cursor-dot {
+            position: fixed; top: 0; left: 0; width: 6px; height: 6px;
+            background-color: var(--champagne-gold); border-radius: 50%;
+            z-index: 10000; pointer-events: none; transition: transform 0.1s ease-out;
+        }
+        #cursor-ring {
+            position: fixed; top: 0; left: 0; width: 35px; height: 35px;
+            border: 1px solid var(--champagne-gold); border-radius: 50%;
+            z-index: 9999; pointer-events: none;
+            transition: width 0.3s, height 0.3s, transform 0.25s cubic-bezier(0.17, 0.67, 0.21, 1);
+            transform: translate(-50%, -50%);
+        }
+        .cursor-hover #cursor-ring { width: 65px; height: 65px; background: rgba(197, 160, 89, 0.05); }
+        .cursor-hover #cursor-dot { transform: scale(1.5); }
+
+        /* --- ATMOSPHERIC OVERLAYS --- */
+        .grain {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.04; pointer-events: none; z-index: 9998;
         }
 
-        .hero-section .subtitle {
-            font-family: 'Cinzel';
-            font-size: 11px;
-            letter-spacing: 0.8rem;
-            color: var(--champagne-gold);
-            margin-bottom: 25px;
-            text-transform: uppercase;
+        /* --- HERO SECTION --- */
+        .hero-section {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: radial-gradient(circle at center, #111 0%, var(--obsidian) 100%);
         }
 
         .hero-section h1 {
-            font-family: 'Playfair Display', serif; /* Playfair Display Update */
-            font-style: italic;
-            font-size: clamp(3rem, 11vw, 8.5rem);
-            font-weight: 400;
-            margin: 0;
-            line-height: 1.1;
-            color: #FFFFFF;
-            letter-spacing: -2px;
+            font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: clamp(3rem, 11vw, 8.5rem); font-weight: 400;
+            margin: 0; line-height: 1.1; color: #FFFFFF; letter-spacing: -2px;
         }
 
-        .hero-section .tagline {
-            font-family: 'Montserrat';
-            font-size: 9px;
-            letter-spacing: 0.5rem;
-            text-transform: uppercase;
-            margin-top: 40px;
-            color: var(--champagne-gold);
-            opacity: 0.8;
+        .hero-section .subtitle {
+            font-family: 'Cinzel'; font-size: 11px; letter-spacing: 0.8rem;
+            color: var(--champagne-gold); margin-bottom: 25px; text-transform: uppercase;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            cursor: pointer;
-            transition: var(--transition);
-            color: var(--champagne-gold);
-        }
-
-        /* --- REGISTRY GRID --- */
+        /* --- REGISTRY LAYOUT --- */
         .museum-container {
-            display: grid;
-            grid-template-columns: 460px 1fr;
-            height: 100vh;
-            border-top: 1px solid var(--ink-border);
+            display: grid; grid-template-columns: 460px 1fr;
+            min-height: 100vh; border-top: 1px solid var(--ink-border);
         }
 
         .scribe-desk {
-            padding: 80px 60px;
-            border-right: 1px solid var(--ink-border);
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            background-color: var(--obsidian);
+            padding: 80px 60px; border-right: 1px solid var(--ink-border);
+            background-color: var(--obsidian); position: sticky; top: 0;
+            height: 100vh; display: flex; flex-direction: column;
         }
 
-        .scribe-desk h2 {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 3.2rem;
-            margin: 0 0 50px 0;
-            font-weight: 400;
-            color: #FFF;
-        }
+        .grand-gallery { padding: 80px; background-color: #030303; }
 
-        .grand-gallery {
-            padding: 80px 70px;
-            overflow-y: auto;
-            background-color: #050505;
-        }
-
-        /* --- FORM ELEMENTS --- */
-        .label {
-            font-family: 'Montserrat';
-            font-size: 9px;
-            letter-spacing: 0.3rem;
-            text-transform: uppercase;
-            color: var(--champagne-gold);
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            border: none;
-            border-bottom: 1px solid var(--ink-border);
-            background: transparent;
-            font-family: 'Cormorant Garamond';
-            font-size: 1.4rem;
-            color: white;
-            padding: 12px 0;
-            margin-bottom: 40px;
-            outline: none;
-            transition: border 0.3s;
-        }
-
-        input:focus, textarea:focus {
-            border-bottom: 1px solid var(--champagne-gold);
-        }
-
+        /* --- BUTTONS & INPUTS --- */
         button.primary {
-            background: transparent;
-            color: var(--champagne-gold);
-            border: 1px solid var(--champagne-gold);
-            padding: 22px;
-            font-family: 'Montserrat';
-            font-size: 10px;
-            letter-spacing: 0.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
+            background: transparent; color: var(--champagne-gold);
+            border: 1px solid var(--champagne-gold); padding: 22px;
+            font-family: 'Montserrat'; font-size: 10px; letter-spacing: 0.5rem;
+            cursor: pointer; transition: var(--transition-luxe); text-transform: uppercase;
         }
 
         button.primary:hover:not(:disabled) {
-            background: var(--champagne-gold);
-            color: var(--obsidian);
+            background: var(--champagne-gold); color: var(--obsidian);
+            box-shadow: 0 0 40px rgba(197, 160, 89, 0.3);
         }
 
-        /* --- ARCHIVE FEED --- */
+        input, select, textarea {
+            width: 100%; border: none; border-bottom: 1px solid var(--ink-border);
+            background: transparent; font-family: 'Cormorant Garamond';
+            font-size: 1.4rem; color: white; padding: 12px 0; margin-bottom: 40px;
+            outline: none; transition: 0.3s;
+        }
+
+        input:focus { border-bottom: 1px solid var(--champagne-gold); }
+
+        /* --- FEED ITEMS --- */
         .artwork {
-            padding: 45px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition);
+            padding: 60px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+            transition: var(--transition-luxe); opacity: 0; transform: translateY(30px);
         }
+        .artwork.visible { opacity: 1; transform: translateY(0); }
 
-        .artwork:hover { padding-left: 15px; border-bottom-color: var(--champagne-gold); }
-
-        .quote { font-size: 1.9rem; font-style: italic; line-height: 1.4; margin-bottom: 15px; font-weight: 300; }
-        .sig { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.25rem; color: var(--champagne-gold); text-transform: uppercase; }
+        .quote { font-size: 2rem; font-style: italic; line-height: 1.4; margin-bottom: 20px; color: #fff; }
 
         @media(max-width: 1100px) {
             .museum-container { grid-template-columns: 1fr; }
-            .scribe-desk { height: auto; border-right: none; }
+            .scribe-desk { position: relative; height: auto; border-right: none; }
+            * { cursor: auto !important; }
+            #cursor-dot, #cursor-ring { display: none; }
         }
     </style>
 </head>
 
 <body>
+    <div class="grain"></div>
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
 
     <section class="hero-section">
         <div class="subtitle">The Collective Myth</div>
-        <h1>ISA Cultural Fest 2026</h1>
-        <div class="tagline">Etching Student Legacies Into Time</div>
+        <h1 id="hero-title">ISA Cultural Fest 2026</h1>
+        <div style="font-family:'Montserrat'; font-size:9px; letter-spacing:6px; margin-top:40px; color:var(--champagne-gold);">ETCHING LEGACIES INTO TIME</div>
         
-        <div class="scroll-indicator" onclick="document.getElementById('registry-start').scrollIntoView()">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="12" y1="5" x2="12" y2="19"></line>
-                <polyline points="19 12 12 19 5 12"></polyline>
-            </svg>
-        </div>
+        <div style="position:absolute; bottom:40px; color:var(--champagne-gold); animation: bounce 2s infinite; cursor:pointer;" onclick="document.getElementById('registry-start').scrollIntoView()">↓</div>
     </section>
 
     <div class="museum-container" id="registry-start">
         <aside class="scribe-desk">
-            <h2>The Registry</h2>
-            
+            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size: 3rem; margin-bottom: 40px;">The Registry</h2>
             <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-            <div class="g_id_signin" style="margin-bottom: 50px;"></div>
+            <div class="g_id_signin" style="margin-bottom: 40px;"></div>
 
-            <label class="label">Recipient of Honor</label>
-            <input id="recipient" placeholder="Name or Team" />
-
-            <label class="label">The Scribe</label>
-            <input id="signature" placeholder="Your Name" />
-
-            <label class="label">Affiliation</label>
-            <select id="from"></select>
-
-            <label class="label">The Testimony</label>
-            <textarea id="msg" style="min-height: 100px;" placeholder="Describe the moment..."></textarea>
-
-            <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px;">AUTHENTICATION REQUIRED TO ETCH</div>
+            <input id="recipient" placeholder="Recipient of Honor" class="interact" />
+            <input id="signature" placeholder="The Scribe Name" class="interact" />
+            <select id="from" class="interact" style="color:var(--champagne-gold);"></select>
+            <textarea id="msg" placeholder="Describe the moment..." class="interact"></textarea>
+            <button class="primary interact" id="submit" disabled>RECORD INTO HISTORY</button>
+            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px;">AUTHENTICATION REQUIRED</div>
         </aside>
 
         <main class="grand-gallery">
-            <header style="margin-bottom: 80px; border-bottom: 1px solid var(--ink-border); padding-bottom: 20px;">
-                <input id="search2" style="font-size: 1.8rem; border:none; margin-bottom: 0;" placeholder="Search the archives..." />
-            </header>
             <div id="feed"></div>
         </main>
     </div>
@@ -225,64 +159,94 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-firebase.initializeApp({
-    apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
-    authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
-    databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "isa-culturtal-fest-2026"
-});
-const db = firebase.database();
-
-const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
-roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
-
-let currentUser = null;
-function handleCredentialResponse(response){
-    const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
-    currentUser = { id: payload.sub };
-    document.getElementById("status").textContent = "SCRIBE RECOGNIZED";
-    document.getElementById("submit").disabled = false;
-}
-
-function renderArtwork(item){
-    const art = document.createElement("div");
-    art.className = "artwork";
-    art.innerHTML = `
-        <div class="quote">“${item.message}”</div>
-        <div class="sig">— ${item.signature || 'ANONYMOUS'} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>
-    `;
-    if(currentUser && item.authorId === currentUser.id){
-        const del = document.createElement("div");
-        del.innerHTML = "[ REDACT ]";
-        del.style = "color:#8B0000; font-size:9px; margin-top:15px; cursor:pointer; font-family:Montserrat; letter-spacing:2px;";
-        del.onclick = () => db.ref("registry/"+item.id).remove();
-        art.appendChild(del);
+    // --- 1. WOW EFFECT: DECRYPTION TITLE ---
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let interval = null;
+    function decrypt(target) {
+        let iteration = 0;
+        clearInterval(interval);
+        const originalValue = target.innerText;
+        interval = setInterval(() => {
+            target.innerText = target.innerText.split("").map((letter, index) => {
+                if(index < iteration) return originalValue[index];
+                return letters[Math.floor(Math.random() * 26)];
+            }).join("");
+            if(iteration >= originalValue.length) clearInterval(interval);
+            iteration += 1 / 3;
+        }, 30);
     }
-    return art;
-}
+    window.onload = () => decrypt(document.getElementById("hero-title"));
 
-document.getElementById("submit").onclick = () => {
-    const targetName = document.getElementById("recipient").value;
-    const message = document.getElementById("msg").value;
-    if(!targetName || !message) return;
-    const newKey = db.ref().child("registry").push().key;
-    db.ref("registry/" + newKey).set({
-        id: newKey, targetName, fromDept: document.getElementById("from").value,
-        message, signature: document.getElementById("signature").value || null,
-        authorId: currentUser.id, timestamp: Date.now()
+    // --- 2. LUXE CURSOR LOGIC ---
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    document.addEventListener('mousemove', (e) => {
+        dot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        ring.style.left = e.clientX + 'px';
+        ring.style.top = e.clientY + 'px';
     });
-    document.getElementById("recipient").value = "";
-    document.getElementById("msg").value = "";
-};
+    document.querySelectorAll('.interact').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
 
-db.ref("registry").on("value", (snap) => {
-    const data = snap.val();
-    const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
-    const feed = document.getElementById("feed");
-    feed.innerHTML = "";
-    items.forEach(i => feed.appendChild(renderArtwork(i)));
-});
+    // --- 3. FIREBASE & RENDER LOGIC ---
+    firebase.initializeApp({
+        apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
+        authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
+        databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "isa-culturtal-fest-2026"
+    });
+    const db = firebase.database();
+    const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
+    roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
+
+    let currentUser = null;
+    function handleCredentialResponse(response){
+        const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+        currentUser = { id: payload.sub };
+        document.getElementById("status").textContent = "SCRIBE RECOGNIZED";
+        document.getElementById("submit").disabled = false;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+
+    function renderArtwork(item){
+        const art = document.createElement("div");
+        art.className = "artwork";
+        art.innerHTML = `
+            <div class="quote">“${item.message}”</div>
+            <div style="font-family:'Montserrat'; font-size:9px; letter-spacing:3px; color:var(--champagne-gold);">
+                — ${item.signature || 'ANONYMOUS'} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}
+            </div>
+        `;
+        observer.observe(art);
+        return art;
+    }
+
+    document.getElementById("submit").onclick = () => {
+        const targetName = document.getElementById("recipient").value;
+        const message = document.getElementById("msg").value;
+        if(!targetName || !message) return;
+        const newKey = db.ref().child("registry").push().key;
+        db.ref("registry/" + newKey).set({
+            id: newKey, targetName, fromDept: document.getElementById("from").value,
+            message, signature: document.getElementById("signature").value || null,
+            authorId: currentUser.id, timestamp: Date.now()
+        });
+        document.getElementById("recipient").value = "";
+        document.getElementById("msg").value = "";
+    };
+
+    db.ref("registry").on("value", (snap) => {
+        const data = snap.val();
+        const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
+        const feed = document.getElementById("feed");
+        feed.innerHTML = "";
+        items.forEach(i => feed.appendChild(renderArtwork(i)));
+    });
 </script>
-
 </body>
 </html>
