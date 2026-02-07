@@ -16,10 +16,10 @@
             --stardust: #E0E0E0;
             --ink-border: rgba(197, 160, 89, 0.2);
             --blood-red: #8B0000;
-            --transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { box-sizing: border-box; scroll-behavior: smooth; }
+        * { box-sizing: border-box; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 
         body, html {
             margin: 0;
@@ -27,9 +27,10 @@
             color: var(--stardust);
             font-family: 'Cormorant Garamond', serif;
             overflow-x: hidden;
+            width: 100%;
         }
 
-        /* --- LUXE CURSOR --- */
+        /* --- DEVICE ADAPTIVE CURSOR --- */
         .cursor-dot, .cursor-outline {
             pointer-events: none;
             position: fixed;
@@ -37,75 +38,98 @@
             transform: translate(-50%, -50%);
             border-radius: 50%;
             z-index: 9999;
+            display: none;
         }
-        .cursor-dot { width: 6px; height: 6px; background-color: var(--champagne-gold); }
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 1px solid var(--champagne-gold);
-            transition: transform 0.2s ease-out;
-        }
-
-        @media (min-width: 1100px) {
+        
+        @media (pointer: fine) {
+            .cursor-dot, .cursor-outline { display: block; }
             body { cursor: none; }
             button, input, select, textarea, .scroll-indicator, .artwork { cursor: none; }
         }
 
-        /* --- HERO --- */
+        .cursor-dot { width: 6px; height: 6px; background-color: var(--champagne-gold); }
+        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--champagne-gold); transition: transform 0.2s ease-out; }
+
+        /* --- HERO SECTION --- */
         .hero-section {
-            height: 100vh;
+            height: 100dvh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 20px;
             background: radial-gradient(circle at center, #121212 0%, var(--obsidian) 100%);
         }
+
         .hero-section h1 {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: clamp(3rem, 11vw, 8.5rem);
+            font-size: clamp(2.5rem, 10vw, 8.5rem);
             font-weight: 400;
             margin: 0;
             color: #FFFFFF;
         }
 
-        /* --- LAYOUT --- */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* --- LAYOUT GRID --- */
         .museum-container {
             display: grid;
             grid-template-columns: 460px 1fr;
-            height: 100vh;
+            min-height: 100vh;
             border-top: 1px solid var(--ink-border);
         }
+
+        @media (max-width: 1100px) {
+            .museum-container { grid-template-columns: 1fr; }
+            .scribe-desk { border-right: none; border-bottom: 1px solid var(--ink-border); padding: 60px 30px !important; }
+            .grand-gallery { padding: 60px 30px !important; }
+        }
+
         .scribe-desk {
             padding: 80px 60px;
             border-right: 1px solid var(--ink-border);
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
             background-color: var(--obsidian);
         }
-        .grand-gallery { padding: 80px 70px; overflow-y: auto; background-color: #050505; }
 
-        /* --- UI ELEMENTS --- */
-        .label { font-family: 'Montserrat'; font-size: 9px; letter-spacing: 0.3rem; text-transform: uppercase; color: var(--champagne-gold); margin-bottom: 12px; display: block; }
-        input, select, textarea { width: 100%; border: none; border-bottom: 1px solid var(--ink-border); background: transparent; font-family: 'Cormorant Garamond'; font-size: 1.4rem; color: white; padding: 12px 0; margin-bottom: 40px; outline: none; }
-        
+        /* --- FORM ELEMENTS --- */
+        input, select, textarea {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--ink-border);
+            background: transparent;
+            font-family: 'Cormorant Garamond';
+            font-size: 1.2rem;
+            color: white;
+            padding: 12px 0;
+            margin-bottom: 40px;
+            outline: none;
+            border-radius: 0;
+        }
+
         button.primary {
             background: transparent; color: var(--champagne-gold); border: 1px solid var(--champagne-gold);
             padding: 22px; font-family: 'Montserrat'; font-size: 10px; letter-spacing: 0.5rem;
             cursor: pointer; transition: var(--transition); text-transform: uppercase;
-        }
-        button.primary:hover:not(:disabled) { background: var(--champagne-gold); color: var(--obsidian); }
-        
-        #signout-btn {
-            border-color: var(--blood-red); color: var(--blood-red); padding: 10px; font-size: 8px; margin-bottom: 40px;
+            width: 100%;
         }
 
-        .artwork { padding: 45px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
-        .quote { font-size: 1.9rem; font-style: italic; line-height: 1.4; margin-bottom: 15px; }
+        button.primary:hover:not(:disabled) { background: var(--champagne-gold); color: var(--obsidian); }
+        button.primary:disabled { opacity: 0.3; cursor: default; }
+
+        /* --- ARTWORK FEED --- */
+        .artwork { padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition); }
+        .artwork:hover { padding-left: 10px; border-bottom-color: var(--champagne-gold); }
+        .quote { font-size: clamp(1.4rem, 4vw, 1.9rem); font-style: italic; line-height: 1.4; margin-bottom: 15px; }
         .sig { font-family: 'Montserrat'; font-size: 9px; color: var(--champagne-gold); letter-spacing: 2px; }
 
-        @media(max-width: 1100px) { .museum-container { grid-template-columns: 1fr; } .scribe-desk { height: auto; border-right: none; } }
     </style>
 </head>
 
@@ -115,40 +139,41 @@
     <div class="cursor-outline" data-cursor-outline></div>
 
     <section class="hero-section">
-        <div class="subtitle" style="font-family:Cinzel; font-size:11px; letter-spacing:8px; color:var(--champagne-gold); margin-bottom:25px;">The Collective Myth</div>
+        <div style="font-family:Cinzel; font-size:10px; letter-spacing:6px; color:var(--champagne-gold); margin-bottom:20px;">The Collective Myth</div>
         <h1>ISA Cultural Fest 2026</h1>
-        <div class="tagline" style="font-family:Montserrat; font-size:9px; letter-spacing:5px; color:var(--champagne-gold); margin-top:40px; opacity:0.8;">ETCHING STUDENT LEGACIES INTO TIME</div>
+        <div style="font-family:Montserrat; font-size:8px; letter-spacing:4px; color:var(--champagne-gold); margin-top:30px; opacity:0.8;">ETCHING STUDENT LEGACIES INTO TIME</div>
+        
+        <div class="scroll-indicator" 
+             style="margin-top: 60px; cursor:pointer; animation: bounce 2s infinite;" 
+             onclick="scrollToRegistry()">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--champagne-gold)" stroke-width="1">
+                <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+            </svg>
+        </div>
     </section>
 
     <div class="museum-container" id="registry-start">
         <aside class="scribe-desk">
-            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size:3.2rem; margin:0 0 50px 0;">The Registry</h2>
+            <h2 style="font-family:'Playfair Display'; font-style:italic; font-size:2.8rem; margin:0 0 40px 0;">The Registry</h2>
             
             <div id="auth-ui">
                 <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-                <div class="g_id_signin" id="google-btn" style="margin-bottom: 50px;"></div>
-                <button id="signout-btn" class="primary" style="display:none;">REVOKE SCRIBE STATUS</button>
+                <div class="g_id_signin" id="google-btn" style="margin-bottom: 40px;"></div>
+                <button id="signout-btn" class="primary" style="display:none; border-color:var(--blood-red); color:var(--blood-red); margin-bottom:40px; padding: 10px;">REVOKE SCRIBE STATUS</button>
             </div>
 
-            <label class="label">Recipient of Honor</label>
-            <input id="recipient" placeholder="Name or Team" />
-
-            <label class="label">The Scribe</label>
-            <input id="signature" placeholder="Your Name" />
-
-            <label class="label">Affiliation</label>
+            <input id="recipient" placeholder="Recipient (Name or Team)" />
+            <input id="signature" placeholder="The Scribe (Your Name)" />
             <select id="from"></select>
-
-            <label class="label">The Testimony</label>
-            <textarea id="msg" style="min-height: 100px;" placeholder="Describe the moment..."></textarea>
+            <textarea id="msg" style="min-height: 120px;" placeholder="The Testimony..."></textarea>
 
             <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
-            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px;">AUTHENTICATION REQUIRED</div>
+            <div id="status" style="font-size: 8px; text-align: center; margin-top: 20px; color: var(--champagne-gold); letter-spacing: 2px; text-transform: uppercase;">Authentication Required</div>
         </aside>
 
         <main class="grand-gallery">
-            <header style="margin-bottom: 80px; border-bottom: 1px solid var(--ink-border); padding-bottom: 20px;">
-                <input id="search2" style="font-size: 1.8rem; border:none; margin-bottom: 0;" placeholder="Search the archives..." />
+            <header style="margin-bottom: 60px; border-bottom: 1px solid var(--ink-border); padding-bottom: 15px;">
+                <input id="search2" style="font-size: 1.4rem; border:none; margin-bottom: 0;" placeholder="Search the archives..." />
             </header>
             <div id="feed"></div>
         </main>
@@ -158,7 +183,7 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-// --- FIREBASE ---
+// --- CONFIG & FIREBASE ---
 firebase.initializeApp({
     apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
     authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
@@ -167,28 +192,35 @@ firebase.initializeApp({
 });
 const db = firebase.database();
 
-// --- CURSOR ---
+// --- SCROLL LOGIC ---
+function scrollToRegistry() {
+    const target = document.getElementById('registry-start');
+    if (target) {
+        setTimeout(() => { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    }
+}
+
+// --- CURSOR LOGIC ---
 const dot = document.querySelector("[data-cursor-dot]");
 const outline = document.querySelector("[data-cursor-outline]");
-window.addEventListener("mousemove", e => {
-    dot.style.left = outline.style.left = `${e.clientX}px`;
-    dot.style.top = outline.style.top = `${e.clientY}px`;
-    outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
-});
+if (window.matchMedia("(pointer: fine)").matches) {
+    window.addEventListener("mousemove", e => {
+        dot.style.left = outline.style.left = `${e.clientX}px`;
+        dot.style.top = outline.style.top = `${e.clientY}px`;
+        outline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 400, fill: "forwards" });
+    });
+}
 
-// --- AUTH & PERSISTENCE ---
+// --- SESSION & PERSISTENCE ---
 let currentUser = JSON.parse(localStorage.getItem("scribe_user"));
-const msgIn = document.getElementById("msg");
-const recIn = document.getElementById("recipient");
+const msgIn = document.getElementById("msg"), recIn = document.getElementById("recipient");
 
-// Auto-recovery
 window.onload = () => {
     if(localStorage.getItem("draft_msg")) msgIn.value = localStorage.getItem("draft_msg");
     if(localStorage.getItem("draft_rec")) recIn.value = localStorage.getItem("draft_rec");
     if(currentUser) updateAuthUI(true);
 };
 
-// Auto-save typing
 msgIn.oninput = () => localStorage.setItem("draft_msg", msgIn.value);
 recIn.oninput = () => localStorage.setItem("draft_rec", recIn.value);
 
@@ -203,21 +235,23 @@ function updateAuthUI(isLoggedIn) {
     document.getElementById("google-btn").style.display = isLoggedIn ? "none" : "block";
     document.getElementById("signout-btn").style.display = isLoggedIn ? "block" : "none";
     document.getElementById("submit").disabled = !isLoggedIn;
-    document.getElementById("status").textContent = isLoggedIn ? "SCRIBE RECOGNIZED" : "AUTHENTICATION REQUIRED";
+    document.getElementById("status").textContent = isLoggedIn ? "Scribe Recognized" : "Authentication Required";
 }
 
 document.getElementById("signout-btn").onclick = () => {
-    localStorage.removeItem("scribe_user");
+    localStorage.clear();
     location.reload();
 };
 
-// --- DATA ---
+// --- APP DATA ---
 const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
 roles.forEach(r => document.getElementById("from").add(new Option(r, r)));
 
-document.getElementById("submit").onclick = () => {
+document.getElementById("submit").onclick = function() {
     const targetName = recIn.value, message = msgIn.value;
     if(!targetName || !message) return;
+    this.disabled = true; this.innerText = "ETCHING...";
+    
     const newKey = db.ref().child("registry").push().key;
     db.ref("registry/" + newKey).set({
         id: newKey, targetName, fromDept: document.getElementById("from").value,
@@ -226,27 +260,38 @@ document.getElementById("submit").onclick = () => {
     }).then(() => {
         msgIn.value = recIn.value = "";
         localStorage.removeItem("draft_msg"); localStorage.removeItem("draft_rec");
+        this.disabled = false; this.innerText = "RECORD INTO HISTORY";
     });
 };
 
+// --- FEED & SEARCH ---
 db.ref("registry").on("value", snap => {
     const feed = document.getElementById("feed");
-    feed.innerHTML = "";
-    const items = snap.val() ? Object.values(snap.val()).sort((a,b) => b.timestamp - a.timestamp) : [];
-    items.forEach(item => {
-        const art = document.createElement("div");
-        art.className = "artwork";
-        art.innerHTML = `<div class="quote">“${item.message}”</div>
-                         <div class="sig">— ${item.signature.toUpperCase()} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>`;
-        if(currentUser && item.authorId === currentUser.id){
-            const del = document.createElement("div");
-            del.innerText = "[ REDACT ]";
-            del.style = "color:var(--blood-red); font-size:9px; margin-top:15px; cursor:pointer; letter-spacing:2px;";
-            del.onclick = () => db.ref("registry/"+item.id).remove();
-            art.appendChild(del);
-        }
-        feed.appendChild(art);
-    });
+    const data = snap.val();
+    const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
+    
+    const render = (list) => {
+        feed.innerHTML = "";
+        list.forEach(item => {
+            const art = document.createElement("div"); art.className = "artwork";
+            art.innerHTML = `<div class="quote">“${item.message}”</div>
+                             <div class="sig">— ${item.signature.toUpperCase()} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>`;
+            if(currentUser && item.authorId === currentUser.id){
+                const del = document.createElement("div");
+                del.innerText = "[ REDACT ]";
+                del.style = "color:var(--blood-red); font-size:9px; margin-top:15px; cursor:pointer; letter-spacing:2px; font-family:Montserrat;";
+                del.onclick = () => db.ref("registry/"+item.id).remove();
+                art.appendChild(del);
+            }
+            feed.appendChild(art);
+        });
+    };
+
+    render(items);
+    document.getElementById("search2").oninput = (e) => {
+        const term = e.target.value.toLowerCase();
+        render(items.filter(i => i.targetName.toLowerCase().includes(term) || i.message.toLowerCase().includes(term)));
+    };
 });
 </script>
 </body>
