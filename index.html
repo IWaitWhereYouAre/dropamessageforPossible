@@ -1,79 +1,680 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Secret Valentine</title>
-    <style>
-        body {
-            background-color: #ffebee;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            overflow: hidden;
-            text-align: center;
-        }
-        #game-container {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            max-width: 400px;
-            z-index: 10;
-        }
-        h1 { color: #d32f2f; }
-        .btn {
-            background-color: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: transform 0.2s;
-        }
-        .btn:hover { transform: scale(1.1); }
-        .hidden { display: none; }
-        #moving-btn { position: absolute; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Secret Garden Message Box</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Secret Garden — Aristocrat */
+      --ink: rgba(18, 28, 22, .92);
+      --ink-soft: rgba(18, 28, 22, .72);
+
+      --parchment: #F5F1E6;      /* warm paper */
+      --porcelain: #FBF8F2;      /* highlights */
+      --moss: #1E3328;           /* deep green */
+      --forest: #14261D;         /* darker */
+      --sage: #DCE4D8;           /* muted botanical */
+      --brass: #B08A3C;          /* antique gold */
+      --rose: #CDA7A1;           /* dusty rose */
+      --mulberry: #5A2C3A;       /* wine shadow */
+      --shadow: rgba(10, 18, 14, .10);
+
+      --radius: 22px;
+      --radius2: 28px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      color: var(--ink);
+      font-family: "Lato", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 900px at 20% 10%, rgba(176,138,60,.16), transparent 55%),
+        radial-gradient(1000px 700px at 85% 20%, rgba(205,167,161,.18), transparent 55%),
+        radial-gradient(900px 800px at 60% 95%, rgba(30,51,40,.18), transparent 60%),
+        linear-gradient(180deg, var(--porcelain), var(--parchment));
+      overflow-x:hidden;
+    }
+
+    /* subtle botanical texture */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(30,51,40,.06) 0 2px, transparent 3px 100%),
+        radial-gradient(circle at 70% 20%, rgba(176,138,60,.05) 0 2px, transparent 3px 100%),
+        radial-gradient(circle at 40% 80%, rgba(205,167,161,.05) 0 2px, transparent 3px 100%);
+      filter: blur(1px);
+      opacity:.85;
+      pointer-events:none;
+      transform: rotate(-3deg);
+    }
+
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px 70px;
+      position: relative;
+    }
+
+    header{
+      padding: 18px 14px 10px;
+      text-align:center;
+    }
+    .kicker{
+      font-family: "Pinyon Script", cursive;
+      font-size: clamp(1.2rem, 4vw, 1.85rem);
+      color: rgba(176,138,60,.95);
+      letter-spacing:.5px;
+      margin: 0 0 8px;
+    }
+    h1{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      font-size: clamp(1.7rem, 4.6vw, 2.55rem);
+      margin: 0 0 10px;
+      color: rgba(20,38,29,.96);
+    }
+    .sub{
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 1.03rem;
+      line-height: 1.65;
+      color: var(--ink-soft);
+    }
+
+    .grid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 16px;
+      align-items:start;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: rgba(251,248,242,.78);
+      border: 1px solid rgba(30,51,40,.10);
+      border-radius: var(--radius2);
+      box-shadow: 0 18px 45px var(--shadow);
+      overflow:hidden;
+      backdrop-filter: blur(8px);
+    }
+    .card .inner{
+      padding: 18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(176,138,60,.28);
+      background: linear-gradient(180deg, rgba(176,138,60,.12), rgba(30,51,40,.06));
+      color: rgba(20,38,29,.88);
+      font-size: .92rem;
+      margin: 0 auto 10px;
+    }
+    .dot{
+      width: 8px; height: 8px;
+      border-radius:50%;
+      background: rgba(176,138,60,.95);
+      box-shadow: 0 0 0 3px rgba(176,138,60,.14);
+    }
+
+    .quote{
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      background:
+        radial-gradient(500px 250px at 20% 30%, rgba(205,167,161,.20), transparent 65%),
+        radial-gradient(500px 260px at 85% 70%, rgba(176,138,60,.18), transparent 65%),
+        rgba(245,241,230,.62);
+      border: 1px solid rgba(30,51,40,.10);
+      margin: 10px 0 0;
+    }
+    .quote p{
+      margin: 0;
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      color: rgba(18,28,22,.86);
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    .quote .by{
+      display:block;
+      margin-top: 10px;
+      text-align:right;
+      font-family:"Lato", sans-serif;
+      font-style: normal;
+      color: rgba(18,28,22,.62);
+      font-size: .92rem;
+    }
+
+    label{
+      display:block;
+      font-size: .92rem;
+      color: rgba(18,28,22,.72);
+      margin: 12px 0 6px;
+    }
+    input, textarea, select{
+      width:100%;
+      padding: 12px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(30,51,40,.16);
+      background: rgba(251,248,242,.88);
+      color: var(--ink);
+      outline: none;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    textarea{
+      min-height: 170px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(176,138,60,.55);
+      box-shadow: 0 0 0 4px rgba(176,138,60,.12);
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    @media (max-width: 520px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    .btns{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .btn{
+      cursor:pointer;
+      border: 1px solid rgba(30,51,40,.18);
+      background: linear-gradient(180deg, rgba(176,138,60,.20), rgba(30,51,40,.08));
+      color: rgba(20,38,29,.92);
+      padding: 11px 14px;
+      border-radius: 16px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+      user-select:none;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      border-color: rgba(176,138,60,.45);
+      box-shadow: 0 10px 22px rgba(10,18,14,.12);
+    }
+    .btn.secondary{
+      background: rgba(251,248,242,.7);
+      font-weight: 700;
+    }
+    .btn.danger{
+      background: linear-gradient(180deg, rgba(90,44,58,.16), rgba(30,51,40,.06));
+      border-color: rgba(90,44,58,.22);
+    }
+
+    .small{
+      font-size: .9rem;
+      color: rgba(18,28,22,.62);
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    /* Messages list */
+    .listHead{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 16px 18px 0;
+    }
+    .listHead h2{
+      margin:0;
+      font-family:"Playfair Display", serif;
+      font-size: 1.25rem;
+      color: rgba(20,38,29,.92);
+    }
+    .count{
+      font-size: .92rem;
+      color: rgba(18,28,22,.62);
+    }
+    .msgs{
+      padding: 14px 18px 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg{
+      border-radius: 18px;
+      border: 1px solid rgba(30,51,40,.10);
+      background:
+        radial-gradient(460px 180px at 25% 25%, rgba(205,167,161,.12), transparent 60%),
+        rgba(251,248,242,.78);
+      padding: 12px 12px;
+    }
+    .meta{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .who{
+      font-weight: 800;
+      color: rgba(20,38,29,.88);
+      font-size: .92rem;
+    }
+    .when{
+      font-size: .82rem;
+      color: rgba(18,28,22,.55);
+      white-space: nowrap;
+    }
+    .body{
+      white-space: pre-wrap;
+      line-height: 1.55;
+      color: rgba(18,28,22,.82);
+      font-size: .98rem;
+    }
+    .actions{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .chip{
+      cursor:pointer;
+      border: 1px solid rgba(30,51,40,.14);
+      background: rgba(245,241,230,.72);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .86rem;
+      color: rgba(20,38,29,.86);
+      user-select:none;
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(10,18,14,.10);
+    }
+
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(20,38,29,.92);
+      color: rgba(251,248,242,.95);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: .92rem;
+      box-shadow: 0 14px 40px rgba(10,18,14,.24);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      z-index: 999;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* tiny heart sprinkles */
+    .hearts{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index: 0;
+    }
+    .heart{
+      position:absolute;
+      font-size: 14px;
+      opacity: .0;
+      animation: floatUp 4.8s ease-in forwards;
+      filter: drop-shadow(0 10px 14px rgba(10,18,14,.14));
+    }
+    @keyframes floatUp{
+      0% { transform: translateY(0) scale(.9); opacity: 0; }
+      10%{ opacity: .75; }
+      100%{ transform: translateY(-220px) scale(1.05); opacity: 0; }
+    }
+    .footer{
+      margin-top: 14px;
+      text-align:center;
+      font-size: .86rem;
+      color: rgba(18,28,22,.55);
+      padding: 10px 8px 0;
+    }
+  </style>
 </head>
+
 <body>
+  <div class="hearts" id="hearts"></div>
 
-    <div id="game-container">
-        <div id="level1">
-            <h1>Will you be my Valentine? ❤️</h1>
-            <p>Choose wisely...</p>
-            <button class="btn" onclick="nextLevel()">YES!</button>
-            <button class="btn" id="no-btn" onmouseover="moveButton()">No</button>
-        </div>
+  <div class="wrap">
+    <header>
+      <div class="kicker">Secret Garden</div>
+      <h1>Leave a message for our friend</h1>
+      <p class="sub">
+        She helped carry Cultural Fest — and now she’s stepping back.
+        If you have one thing you want her to remember: write it here.
+        <span style="opacity:.85">Short or long. Soft or funny. Just real.</span>
+      </p>
 
-        <div id="level2" class="hidden">
-            <h1>Yay! 🥂</h1>
-            <p>I knew you'd say yes. You're the best thing that ever happened to me.</p>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHY5NjVqZGV4ZzR0bm8zam5ueGZ6bmV4ZzR0bm8zam5ueGZ6bmV4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/MDJ9IbxxvDUQM/giphy.gif" width="200" alt="Cute Cat">
-            <br><br>
-            <p><strong>Our Date: Feb 14th @ 7PM</strong></p>
+      <div class="quote">
+        <p>
+          “Thank you for the experience… I’m very busy recently, so I might not be able to do as much as before.
+          But I really love you guys and hope we can work together in the future too.”
+        </p>
+        <span class="by">— her message to the team</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- LEFT: form -->
+      <section class="card">
+        <div class="inner">
+          <div class="badge"><span class="dot"></span> Drop a message (saved locally)</div>
+
+          <div class="row">
+            <div>
+              <label for="name">Your name (optional)</label>
+              <input id="name" maxlength="40" placeholder="e.g., Siri / PR Team / Anonymous" />
+            </div>
+            <div>
+              <label for="tone">Tone</label>
+              <select id="tone">
+                <option value="soft">Soft & sincere</option>
+                <option value="funny">Warm & funny</option>
+                <option value="respect">Respectful & formal</option>
+                <option value="short">Short & iconic</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="message">Your message</label>
+          <textarea id="message" maxlength="900" placeholder="Write what you want her to hear."></textarea>
+
+          <div class="btns">
+            <button class="btn" id="sendBtn">Add message</button>
+            <button class="btn secondary" id="suggestBtn">Give me a draft</button>
+            <button class="btn secondary" id="exportBtn">Export all (JSON)</button>
+            <button class="btn danger" id="clearBtn">Clear all (local)</button>
+          </div>
+
+          <div class="small">
+            ✅ This page works offline and doesn’t send anything to a server.
+            If you want to collect messages from many people, host it on GitHub Pages / Netlify and ask everyone to
+            <b>export and send you the JSON</b> — or connect it to Google Forms later.
+          </div>
         </div>
+      </section>
+
+      <!-- RIGHT: message list -->
+      <aside class="card">
+        <div class="listHead">
+          <h2>Messages</h2>
+          <div class="count"><span id="count">0</span> saved</div>
+        </div>
+        <div class="msgs" id="msgs"></div>
+        <div class="footer">Tip: tap “Copy” to paste into LINE / IG / email ✉️</div>
+      </aside>
     </div>
+  </div>
 
-    <script>
-        function moveButton() {
-            const btn = document.getElementById('no-btn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight);
-            btn.style.position = 'absolute';
-            btn.style.left = x + 'px';
-            btn.style.top = y + 'px';
-        }
+  <div class="toast" id="toast">Saved.</div>
 
-        function nextLevel() {
-            document.getElementById('level1').classList.add('hidden');
-            document.getElementById('level2').classList.remove('hidden');
-            startConfetti();
-        }
-    </script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+
+    const storageKey = "secret_garden_messages_v1";
+    let messages = [];
+
+    const toneTemplates = {
+      soft: [
+        "Thank you for showing up when it mattered most. Cultural Fest wouldn’t feel the same without you.",
+        "You did more than you think you did. Rest well, and please know you’re appreciated—always.",
+        "Even if you step back, you’re still part of the story. Proud of you."
+      ],
+      funny: [
+        "You carried Cultural Fest like it was a side quest… and still made it legendary. Respect 🫡",
+        "PR queen behavior. Step back if you need—your aura already did the work 😽💘",
+        "You leaving the core team is illegal… but I’ll allow it because you deserve sleep 🥹"
+      ],
+      respect: [
+        "Thank you for your dedication and contribution to Cultural Fest. Your work is sincerely appreciated.",
+        "Wishing you the very best with your commitments. We hope to collaborate again in the future.",
+        "Your efforts have made a meaningful impact. Thank you."
+      ],
+      short: [
+        "You mattered. You still do.",
+        "PR team legend. Period.",
+        "Rest. Reset. Return when you want."
+      ]
+    };
+
+    function nowStamp(){
+      const d = new Date();
+      // Bangkok-friendly display without needing timezone libs
+      return d.toLocaleString([], { year:"numeric", month:"short", day:"2-digit", hour:"2-digit", minute:"2-digit" });
+    }
+
+    function saveLocal(){
+      localStorage.setItem(storageKey, JSON.stringify(messages));
+    }
+
+    function loadLocal(){
+      try{
+        const raw = localStorage.getItem(storageKey);
+        messages = raw ? JSON.parse(raw) : [];
+      } catch(e){
+        messages = [];
+      }
+    }
+
+    function toast(text){
+      const t = $("toast");
+      t.textContent = text;
+      t.classList.add("show");
+      setTimeout(()=> t.classList.remove("show"), 1600);
+    }
+
+    function sprinkleHearts(){
+      const box = $("hearts");
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      const hearts = ["💘","💗","🤍","💞","✨"];
+      heart.textContent = hearts[Math.floor(Math.random()*hearts.length)];
+      heart.style.left = Math.floor(Math.random()*100) + "vw";
+      heart.style.bottom = "-20px";
+      heart.style.opacity = "0";
+      heart.style.fontSize = (12 + Math.random()*10).toFixed(0) + "px";
+      heart.style.color = "rgba(176,138,60,.95)";
+      box.appendChild(heart);
+      setTimeout(()=> heart.remove(), 5200);
+    }
+
+    function escapeForShare(s){
+      return (s || "").trim();
+    }
+
+    function render(){
+      $("count").textContent = messages.length;
+
+      const container = $("msgs");
+      container.innerHTML = "";
+
+      if(messages.length === 0){
+        const empty = document.createElement("div");
+        empty.className = "msg";
+        empty.innerHTML = `
+          <div class="body" style="opacity:.7">
+            No messages yet. Be the first to leave something kind.
+          </div>`;
+        container.appendChild(empty);
+        return;
+      }
+
+      // latest first
+      const sorted = [...messages].sort((a,b)=> b.ts - a.ts);
+
+      for(const m of sorted){
+        const el = document.createElement("div");
+        el.className = "msg";
+
+        const who = m.name?.trim() ? m.name.trim() : "Anonymous";
+        const when = m.when;
+
+        el.innerHTML = `
+          <div class="meta">
+            <div class="who">${who}</div>
+            <div class="when">${when}</div>
+          </div>
+          <div class="body">${m.text.replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
+          <div class="actions">
+            <div class="chip" data-act="copy" data-id="${m.id}">Copy</div>
+            <div class="chip" data-act="delete" data-id="${m.id}">Delete</div>
+          </div>
+        `;
+        container.appendChild(el);
+      }
+
+      container.querySelectorAll(".chip").forEach(ch => {
+        ch.addEventListener("click", async () => {
+          const act = ch.dataset.act;
+          const id = ch.dataset.id;
+          const msg = messages.find(x => x.id === id);
+          if(!msg) return;
+
+          if(act === "delete"){
+            messages = messages.filter(x => x.id !== id);
+            saveLocal();
+            render();
+            toast("Deleted.");
+            return;
+          }
+
+          if(act === "copy"){
+            const who = msg.name?.trim() ? msg.name.trim() : "Anonymous";
+            const text =
+`To you,
+${escapeForShare(msg.text)}
+
+— ${who}`;
+            try{
+              await navigator.clipboard.writeText(text);
+              toast("Copied to clipboard.");
+              sprinkleHearts();
+            }catch(e){
+              // fallback
+              const ta = document.createElement("textarea");
+              ta.value = text;
+              document.body.appendChild(ta);
+              ta.select();
+              document.execCommand("copy");
+              ta.remove();
+              toast("Copied (fallback).");
+              sprinkleHearts();
+            }
+          }
+        });
+      });
+    }
+
+    function makeDraft(tone){
+      const pool = toneTemplates[tone] || toneTemplates.soft;
+      const pick = () => pool[Math.floor(Math.random()*pool.length)];
+      // combine 2 lines for richness
+      const a = pick();
+      let b = pick();
+      if(b === a) b = pick();
+      return a + "\n" + b;
+    }
+
+    $("suggestBtn").addEventListener("click", () => {
+      const tone = $("tone").value;
+      const draft = makeDraft(tone);
+      $("message").value = draft;
+      toast("Draft inserted.");
+      sprinkleHearts();
+    });
+
+    $("sendBtn").addEventListener("click", () => {
+      const name = $("name").value.slice(0,40);
+      const text = $("message").value.trim();
+
+      if(text.length < 2){
+        toast("Write a little more.");
+        return;
+      }
+
+      const msg = {
+        id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + "_" + Math.random().toString(16).slice(2),
+        name,
+        text: text.slice(0,900),
+        when: nowStamp(),
+        ts: Date.now()
+      };
+
+      messages.push(msg);
+      saveLocal();
+      render();
+
+      $("message").value = "";
+      toast("Saved.");
+      sprinkleHearts();
+      setTimeout(sprinkleHearts, 220);
+    });
+
+    $("exportBtn").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify({
+        exportedAt: new Date().toISOString(),
+        count: messages.length,
+        messages
+      }, null, 2)], { type: "application/json" });
+
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "secret-garden-messages.json";
+      a.click();
+      setTimeout(()=> URL.revokeObjectURL(a.href), 800);
+      toast("Exported.");
+      sprinkleHearts();
+    });
+
+    $("clearBtn").addEventListener("click", () => {
+      const ok = confirm("Clear all saved messages on this device?");
+      if(!ok) return;
+      messages = [];
+      saveLocal();
+      render();
+      toast("Cleared.");
+    });
+
+    // init
+    loadLocal();
+    render();
+
+    // gentle ambient hearts (rare)
+    setInterval(() => {
+      if(Math.random() < 0.18) sprinkleHearts();
+    }, 1200);
+  </script>
 </body>
 </html>
