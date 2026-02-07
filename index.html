@@ -1,277 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>The Imperial Gallery | ISA 2026</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>The Registry | ISA 2026</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
-<script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-<style>
-:root {
-  --pastel-blue: #E3EFFF;
-  --pastel-purple: #EBE3FF;
-  --royal-ink: #1A1C20; 
-  --gold-foil: #BFA15E;
-  --glass: rgba(255, 255, 255, 0.45);
-  --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-}
+    <style>
+        :root {
+            --deep-black: #000000;
+            --gold-leaf: #BFA15E;
+            --off-white: #e0e0e0;
+            --input-border: rgba(191, 161, 94, 0.3);
+            --transition: all 0.4s ease;
+        }
 
-* { box-sizing: border-box; }
+        * { box-sizing: border-box; }
 
-body, html {
-  margin: 0;
-  height: 100%;
-  font-family: 'Cormorant Garamond', serif;
-  background: linear-gradient(135deg, var(--pastel-blue) 0%, var(--pastel-purple) 100%);
-  background-attachment: fixed;
-  color: var(--royal-ink);
-  overflow: hidden; /* We handle scrolling in panes */
-}
+        body, html {
+            margin: 0;
+            height: 100%;
+            font-family: 'Cormorant Garamond', serif;
+            background-color: var(--deep-black);
+            color: var(--off-white);
+            overflow: hidden;
+        }
 
-/* --- MUSEUM LAYOUT --- */
-.museum-container {
-  display: grid;
-  grid-template-columns: 400px 1fr;
-  height: 100vh;
-}
+        /* --- LAYOUT --- */
+        .museum-container {
+            display: grid;
+            grid-template-columns: 480px 1fr;
+            height: 100vh;
+        }
 
-@media(max-width: 1000px) {
-  .museum-container { grid-template-columns: 1fr; overflow-y: auto; }
-  .scribe-desk { height: auto !important; border-right: none !important; border-bottom: 1px solid var(--gold-foil); }
-  body { overflow: auto; }
-}
+        /* --- LEFT SIDEBAR (THE REGISTRY) --- */
+        .scribe-desk {
+            background: var(--deep-black);
+            padding: 80px 60px;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
 
-/* --- SIDEBAR: THE SCRIBE'S DESK --- */
-.scribe-desk {
-  background: var(--glass);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  padding: 40px;
-  border-right: 1px solid rgba(191, 161, 94, 0.3);
-  display: flex;
-  flex-direction: column;
-  z-index: 10;
-  overflow-y: auto;
-}
+        .scribe-desk h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 3.8rem;
+            margin: 0 0 50px 0;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
 
-.scribe-desk h2 {
-  font-family: 'Cinzel';
-  font-size: 1.5rem;
-  letter-spacing: 0.2rem;
-  margin-top: 0;
-}
+        /* --- RIGHT SIDEBAR (THE ARCHIVES) --- */
+        .grand-gallery {
+            padding: 80px 60px;
+            overflow-y: auto;
+            background: #030303;
+        }
 
-/* --- MAIN: THE GRAND GALLERY --- */
-.grand-gallery {
-  padding: 60px;
-  overflow-y: auto;
-  scroll-behavior: smooth;
-}
+        .gallery-header {
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--input-border);
+            padding-bottom: 10px;
+        }
 
-.gallery-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 60px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  padding-bottom: 20px;
-}
+        /* --- INPUTS & LABELS --- */
+        .label {
+            font-family: 'Montserrat';
+            font-size: 9px;
+            letter-spacing: 0.25rem;
+            text-transform: uppercase;
+            color: var(--gold-leaf);
+            margin-bottom: 10px;
+            display: block;
+            opacity: 0.7;
+        }
 
-/* --- ARTWORK (TESTIMONY CARDS) --- */
-.artwork {
-  background: white;
-  padding: 50px;
-  margin-bottom: 40px;
-  border: 1px solid rgba(0,0,0,0.05);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
-  position: relative;
-  transition: var(--transition);
-  animation: fadeIn 0.8s ease-out forwards;
-}
+        input, select, textarea {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid var(--input-border);
+            background: transparent;
+            font-family: 'Cormorant Garamond';
+            font-size: 1.3rem;
+            color: white;
+            padding: 10px 0;
+            margin-bottom: 35px;
+            outline: none;
+            transition: var(--transition);
+        }
 
-.artwork:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(120, 110, 160, 0.1);
-  border-color: var(--gold-foil);
-}
+        input:focus, textarea:focus {
+            border-bottom: 1px solid var(--gold-leaf);
+        }
 
-/* "Museum Frame" corners */
-.artwork::before {
-  content: ""; position: absolute; top: 15px; left: 15px; width: 20px; height: 20px;
-  border-top: 1px solid var(--gold-foil); border-left: 1px solid var(--gold-foil);
-}
+        /* --- BUTTONS --- */
+        button.primary {
+            background: transparent;
+            color: var(--gold-leaf);
+            border: 1px solid var(--gold-leaf);
+            padding: 18px;
+            font-family: 'Montserrat';
+            font-size: 10px;
+            letter-spacing: 0.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+        button.primary:hover:not(:disabled) {
+            background: var(--gold-leaf);
+            color: black;
+        }
 
-/* --- TYPOGRAPHY & INPUTS --- */
-.label {
-  font-family: 'Montserrat';
-  font-size: 9px;
-  letter-spacing: 0.2rem;
-  text-transform: uppercase;
-  color: var(--gold-foil);
-  margin-bottom: 8px;
-  display: block;
-}
+        button.primary:disabled {
+            opacity: 0.2;
+            cursor: not-allowed;
+        }
 
-input, select, textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  background: transparent;
-  font-family: 'Cormorant Garamond';
-  font-size: 1.2rem;
-  padding: 10px 0;
-  margin-bottom: 25px;
-  outline: none;
-}
+        /* --- FEED ITEMS --- */
+        .artwork {
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: var(--transition);
+        }
 
-button.primary {
-  background: var(--royal-ink);
-  color: white;
-  border: none;
-  padding: 20px;
-  font-family: 'Cinzel';
-  letter-spacing: 0.4rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
+        .artwork:hover {
+            border-bottom-color: var(--gold-leaf);
+        }
 
-button.primary:hover:not(:disabled) {
-  background: var(--gold-foil);
-}
+        .quote { 
+            font-size: 1.9rem; 
+            line-height: 1.3; 
+            margin-bottom: 12px; 
+            font-weight: 300; 
+            font-style: italic;
+        }
 
-.meta { font-family: 'Montserrat'; font-size: 10px; letter-spacing: 0.2rem; margin-bottom: 15px; }
-.quote { font-size: 2rem; font-style: italic; line-height: 1.2; margin-bottom: 20px; }
-.sig { font-family: 'Cinzel'; font-size: 12px; opacity: 0.7; }
+        .sig { 
+            font-family: 'Montserrat'; 
+            font-size: 10px; 
+            letter-spacing: 0.15rem; 
+            color: var(--gold-leaf); 
+            text-transform: uppercase;
+        }
 
-</style>
+        /* Hide scrollbars for a cleaner look */
+        .scribe-desk::-webkit-scrollbar, .grand-gallery::-webkit-scrollbar {
+            width: 4px;
+        }
+        .grand-gallery::-webkit-scrollbar-thumb {
+            background: var(--gold-leaf);
+        }
+
+        @media(max-width: 900px) {
+            .museum-container { grid-template-columns: 1fr; }
+            .scribe-desk { height: auto; border-right: none; border-bottom: 1px solid var(--input-border); }
+        }
+    </style>
 </head>
 
 <body>
 
 <div class="museum-container">
-  <aside class="scribe-desk">
-    <div class="label" style="margin-bottom: 30px;">ISA Cultural Fest 2026</div>
-    <h2>The Scribe's Desk</h2>
-    
-    <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
-    <div class="g_id_signin" style="margin-bottom: 30px;"></div>
+    <aside class="scribe-desk">
+        <h2>The Registry</h2>
+        
+        <div id="g_id_onload" data-client_id="671163289983-2056vpimutuatgerek6676pr1ob9p1n0.apps.googleusercontent.com" data-callback="handleCredentialResponse"></div>
+        <div class="g_id_signin" style="margin-bottom: 40px;"></div>
 
-    <label class="label">Origin Estate</label>
-    <select id="from"></select>
+        <label class="label">Recipient of Honor</label>
+        <input id="recipient" placeholder="Name or Team" />
 
-    <label class="label">Recipient Estate</label>
-    <select id="to"></select>
+        <label class="label">The Scribe</label>
+        <input id="signature" placeholder="Your Name" />
 
-    <label class="label">Distinguished Recipient</label>
-    <input id="recipient" placeholder="Enter name..." />
+        <label class="label">Affiliation</label>
+        <select id="from"></select>
 
-    <label class="label">Your Signature</label>
-    <input id="signature" placeholder="Leave blank for anonymity" />
+        <label class="label">The Testimony</label>
+        <textarea id="msg" style="min-height: 80px;" placeholder="Describe the moment..."></textarea>
 
-    <label class="label">The Testimony</label>
-    <textarea id="msg" style="min-height: 100px;" placeholder="Compose your legacy..."></textarea>
+        <button class="primary" id="submit" disabled>RECORD INTO HISTORY</button>
+        <div id="status" style="font-size: 9px; text-align: center; margin-top: 15px; color: var(--gold-leaf); letter-spacing: 1px;">SIGN IN TO MANAGE YOUR LEGACY</div>
+    </aside>
 
-    <button class="primary" id="submit" disabled>ETCH INTO HISTORY</button>
-    <div id="status" style="font-size: 10px; text-align: center; margin-top: 15px; color: var(--gold-foil);">SIGN-IN REQUIRED</div>
-  </aside>
+    <main class="grand-gallery">
+        <header class="gallery-header">
+            <input id="search2" style="font-size: 1.8rem; margin-bottom: 5px; border:none;" placeholder="Search the archives..." />
+        </header>
 
-  <main class="grand-gallery">
-    <header class="gallery-header">
-      <div>
-        <div class="label">Exhibition</div>
-        <h1 style="font-family: 'Cinzel'; font-weight: 400; margin: 0; font-size: 1.8rem;">The Grand Archive</h1>
-      </div>
-      <div style="width: 250px;">
-        <input id="search2" style="font-size: 14px; margin-bottom: 0;" placeholder="Search the scrolls..." />
-      </div>
-    </header>
-
-    <div id="feed">
-      </div>
-  </main>
+        <div id="feed">
+            </div>
+    </main>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <script>
-/* Logic stays robust but updated for new UI */
 firebase.initializeApp({
-  apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
-  authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
-  databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "isa-culturtal-fest-2026"
+    apiKey: "AIzaSyBfj4i0quFWPTHCdnC8GT3BSEsKvvvqzRA",
+    authDomain: "isa-culturtal-fest-2026.firebaseapp.com",
+    databaseURL: "https://isa-culturtal-fest-2026-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "isa-culturtal-fest-2026"
 });
 const db = firebase.database();
 
-const roles = ["PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Core Council", "Ambassadors", "Attendees"];
+const roles = ["Core Committee", "PR", "Finance", "Co-Presidents", "Helpers", "Activity Team", "HR", "Ambassadors", "Attendees"];
 roles.forEach(r => {
-  document.getElementById("from").add(new Option(r, r));
-  document.getElementById("to").add(new Option(r, r));
+    document.getElementById("from").add(new Option(r, r));
 });
 
 let currentUser = null;
 function handleCredentialResponse(response){
-  const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
-  currentUser = { id: payload.sub };
-  document.getElementById("status").textContent = "SCRIBE AUTHENTICATED";
-  document.getElementById("submit").disabled = false;
+    const payload = JSON.parse(atob(response.credential.split('.')[1].replace(/-/g,'+').replace(/_/g,'/')));
+    currentUser = { id: payload.sub };
+    document.getElementById("status").textContent = "SCRIBE AUTHENTICATED";
+    document.getElementById("submit").disabled = false;
 }
 
 function renderArtwork(item){
-  const art = document.createElement("div");
-  art.className = "artwork";
-  art.innerHTML = `
-    <div class="meta">${item.fromDept.toUpperCase()} // ${item.toDept.toUpperCase()}</div>
-    <div class="quote">“${item.message}”</div>
-    <div class="sig">— ${item.signature || 'ANONYMOUS'} FOR ${item.targetName.toUpperCase()}</div>
-  `;
-  
-  if(currentUser && item.authorId === currentUser.id){
-    const del = document.createElement("button");
-    del.innerHTML = "REMOVE FROM GALLERY";
-    del.style = "background:none; border:1px solid #8B0000; color:#8B0000; font-size:9px; margin-top:20px; cursor:pointer; padding:5px 10px; font-family:Montserrat;";
-    del.onclick = () => db.ref("registry/"+item.id).remove();
-    art.appendChild(del);
-  }
-  return art;
+    const art = document.createElement("div");
+    art.className = "artwork";
+    art.innerHTML = `
+        <div class="quote">“${item.message}”</div>
+        <div class="sig">— ${item.signature || 'ANONYMOUS'} | ${item.fromDept.toUpperCase()} TO ${item.targetName.toUpperCase()}</div>
+    `;
+    
+    if(currentUser && item.authorId === currentUser.id){
+        const del = document.createElement("div");
+        del.innerHTML = "REDACT FROM HISTORY";
+        del.style = "color:#8B0000; font-size:9px; margin-top:10px; cursor:pointer; font-family:Montserrat; letter-spacing:1px; display:inline-block;";
+        del.onclick = () => db.ref("registry/"+item.id).remove();
+        art.appendChild(del);
+    }
+    return art;
 }
 
 document.getElementById("submit").onclick = () => {
-  const targetName = document.getElementById("recipient").value;
-  const message = document.getElementById("msg").value;
-  if(!targetName || !message) return;
+    const targetName = document.getElementById("recipient").value;
+    const message = document.getElementById("msg").value;
+    if(!targetName || !message) return;
 
-  const newKey = db.ref().child("registry").push().key;
-  db.ref("registry/" + newKey).set({
-    id: newKey,
-    targetName,
-    fromDept: document.getElementById("from").value,
-    toDept: document.getElementById("to").value,
-    message,
-    signature: document.getElementById("signature").value || null,
-    authorId: currentUser.id,
-    timestamp: Date.now()
-  });
+    const newKey = db.ref().child("registry").push().key;
+    db.ref("registry/" + newKey).set({
+        id: newKey,
+        targetName,
+        fromDept: document.getElementById("from").value,
+        message,
+        signature: document.getElementById("signature").value || null,
+        authorId: currentUser.id,
+        timestamp: Date.now()
+    });
 
-  document.getElementById("recipient").value = "";
-  document.getElementById("msg").value = "";
+    document.getElementById("recipient").value = "";
+    document.getElementById("msg").value = "";
 };
 
 db.ref("registry").on("value", (snap) => {
-  const data = snap.val();
-  const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
-  const feed = document.getElementById("feed");
-  feed.innerHTML = "";
-  items.forEach(i => feed.appendChild(renderArtwork(i)));
+    const data = snap.val();
+    const items = data ? Object.values(data).sort((a,b) => b.timestamp - a.timestamp) : [];
+    const feed = document.getElementById("feed");
+    feed.innerHTML = "";
+    items.forEach(i => feed.appendChild(renderArtwork(i)));
 });
 </script>
 
